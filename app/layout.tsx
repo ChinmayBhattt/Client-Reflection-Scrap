@@ -7,6 +7,7 @@ import { Footer } from "@/components/footer";
 import { FloatingWhatsApp } from "@/components/floating-whatsapp";
 import { MobileCallBar } from "@/components/mobile-call-bar";
 import { Toaster } from "@/components/ui/sonner";
+import { getCurrentUser } from "@/lib/services/user";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -86,11 +87,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const user = await getCurrentUser();
+
   // LocalBusiness Structured Data JSON-LD
   const localBusinessJsonLd = {
     "@context": "https://schema.org",
@@ -153,7 +156,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans min-h-screen flex flex-col bg-brand-bg text-brand-dark selection:bg-brand-blue selection:text-white">
-        <Navbar />
+        <Navbar user={user} />
         <main className="flex-1">{children}</main>
         <Footer />
         <FloatingWhatsApp />
