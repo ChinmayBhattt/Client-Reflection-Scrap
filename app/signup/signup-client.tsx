@@ -53,17 +53,50 @@ export function SignupClient() {
       }
 
       const redirectTo = `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`;
-      const { error } = await supabase.auth.signInWithOAuth({
+      const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
           redirectTo,
+          skipBrowserRedirect: true,
         },
       });
 
       if (error) {
         toast.error(error.message);
         setIsGoogleLoading(false);
+        return;
       }
+
+      if (!data?.url) {
+        toast.error("Could not generate Google authorization link.");
+        setIsGoogleLoading(false);
+        return;
+      }
+
+      // Pre-check if the provider is enabled before redirecting the whole window
+      try {
+        const testRes = await fetch(data.url, { method: "GET", redirect: "manual" });
+        if (testRes.status === 400) {
+          const errJson = await testRes.json().catch(() => null);
+          if (errJson?.msg?.includes("provider is not enabled")) {
+            toast.error(
+              "Google Sign-In is not enabled yet in your Supabase project. In Supabase Dashboard, go to Authentication > Sign In / Providers > 'Supabase Auth' tab (not Third-Party Auth) and enable Google. Or register with Email & Password.",
+              { duration: 8000 }
+            );
+          } else {
+            toast.error(
+              errJson?.msg || "Google Sign-In is currently unavailable. Please register with Email & Password.",
+              { duration: 6000 }
+            );
+          }
+          setIsGoogleLoading(false);
+          return;
+        }
+      } catch {
+        // If pre-check fails due to network/CORS on a valid redirect, proceed with browser redirect
+      }
+
+      window.location.href = data.url;
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "Google signup error";
       toast.error(message);

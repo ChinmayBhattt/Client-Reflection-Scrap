@@ -66,33 +66,35 @@ export function Navbar({ user: initialUser }: NavbarProps) {
       )}
     >
       <div className="container max-w-7xl mx-auto flex items-center justify-between gap-2 lg:gap-4">
-        {/* 1. BRAND LOGO (Left side) */}
-        <Link
-          href="/"
-          className="flex items-center gap-3 shrink-0 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-xl"
-        >
-          <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-xl border border-brand-border bg-white shadow-sm flex items-center justify-center p-1.5 transition-transform group-hover:scale-105">
-            <Image
-              src="/logo-icon.png"
-              alt="Reflection Scrap Solutions LLP Logo"
-              width={38}
-              height={38}
-              priority
-              className="h-full w-full object-contain"
-            />
-          </div>
-          <div className="flex flex-col text-left">
-            <span className="font-extrabold text-base md:text-lg leading-none tracking-tight text-brand-dark">
-              Reflection <span className="text-brand-blue">Scrap</span>
-            </span>
-            <span className="text-[10px] md:text-[11px] font-bold tracking-wider uppercase text-brand-green mt-1">
-              Solutions LLP
-            </span>
-          </div>
-        </Link>
+        {/* 1. BRAND LOGO (Left side - flex-1 justify-start) */}
+        <div className="flex-1 flex items-center justify-start min-w-0">
+          <Link
+            href="/"
+            className="flex items-center gap-2.5 shrink-0 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-xl"
+          >
+            <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl border border-brand-border bg-white shadow-sm flex items-center justify-center p-1.5 transition-transform group-hover:scale-105">
+              <Image
+                src="/logo-icon.png"
+                alt="Reflection Scrap Solutions LLP Logo"
+                width={36}
+                height={36}
+                priority
+                className="h-full w-full object-contain"
+              />
+            </div>
+            <div className="flex flex-col text-left">
+              <span className="font-extrabold text-base md:text-lg leading-none tracking-tight text-brand-dark whitespace-nowrap">
+                Reflection <span className="text-brand-blue">Scrap</span>
+              </span>
+              <span className="text-[10px] md:text-[11px] font-bold tracking-wider uppercase text-brand-green mt-1 whitespace-nowrap">
+                Solutions LLP
+              </span>
+            </div>
+          </Link>
+        </div>
 
-        {/* 2. DESKTOP NAVIGATION LINKS (Centered) */}
-        <nav className="hidden lg:flex items-center justify-center gap-1 xl:gap-1.5 flex-1 mx-2 xl:mx-6">
+        {/* 2. DESKTOP NAVIGATION LINKS (Centered - shrink-0) */}
+        <nav className="hidden lg:flex items-center justify-center gap-0.5 xl:gap-1.5 shrink-0">
           {navLinks.map((link) => {
             const isActive =
               link.href === "/"
@@ -103,7 +105,7 @@ export function Navbar({ user: initialUser }: NavbarProps) {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "px-3 xl:px-3.5 py-2 rounded-lg text-[13px] xl:text-sm font-semibold transition-all duration-150 whitespace-nowrap",
+                  "px-2.5 xl:px-3 py-1.5 rounded-lg text-xs xl:text-[13px] font-semibold transition-all duration-150 whitespace-nowrap",
                   isActive
                     ? "text-brand-blue bg-brand-blue-light font-bold"
                     : "text-brand-dark/80 hover:text-brand-blue hover:bg-gray-100/80"
@@ -115,35 +117,31 @@ export function Navbar({ user: initialUser }: NavbarProps) {
           })}
         </nav>
 
-        {/* 3. DESKTOP ACTIONS (Right side) */}
-        <div className="hidden lg:flex items-center gap-2.5 shrink-0">
+        {/* 3. DESKTOP ACTIONS (Right side - flex-1 justify-end) */}
+        <div className="hidden lg:flex flex-1 items-center justify-end gap-2 xl:gap-2.5 shrink-0">
           {/* Quick Call */}
           <a
             href={`tel:${SITE_CONFIG.contact.phoneRaw}`}
-            className="flex items-center gap-2 h-10 px-3 rounded-lg border border-brand-border bg-brand-bg/60 text-brand-dark hover:border-brand-blue hover:bg-brand-blue-light transition-colors"
+            className="flex items-center gap-2 h-9 px-2.5 rounded-lg border border-brand-border bg-brand-bg/60 text-brand-dark hover:border-brand-blue hover:bg-brand-blue-light transition-colors text-xs font-bold"
+            title={`Quick Call: ${SITE_CONFIG.contact.phone}`}
           >
-            <div className="h-6 w-6 rounded-full bg-brand-blue-light text-brand-blue flex items-center justify-center shrink-0">
+            <div className="h-5 w-5 rounded-full bg-brand-blue-light text-brand-blue flex items-center justify-center shrink-0">
               <Phone className="h-3 w-3" />
             </div>
-            <div className="flex flex-col leading-none text-left">
-              <span className="text-[9px] text-brand-muted uppercase font-bold tracking-wider">
-                Quick Call
-              </span>
-              <span className="text-xs font-bold text-brand-dark mt-0.5 whitespace-nowrap">
-                {SITE_CONFIG.contact.phone}
-              </span>
-            </div>
+            <span className="hidden xl:inline text-xs font-bold whitespace-nowrap">
+              {SITE_CONFIG.contact.phone}
+            </span>
           </a>
 
           {/* Book Pickup CTA */}
           <Button
             asChild
-            size="default"
+            size="sm"
             variant="secondary"
-            className="h-10 px-4 gap-2 font-bold shadow-sm"
+            className="h-9 px-3.5 gap-1.5 font-bold shadow-sm text-xs"
           >
             <Link href="/book">
-              <CalendarCheck className="h-4 w-4" />
+              <CalendarCheck className="h-3.5 w-3.5" />
               <span>Book Pickup</span>
             </Link>
           </Button>
@@ -154,9 +152,9 @@ export function Navbar({ user: initialUser }: NavbarProps) {
               <button
                 type="button"
                 onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                className="flex items-center gap-2 h-10 px-2.5 rounded-lg border border-brand-border bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-colors"
+                className="flex items-center gap-2 h-9 px-2.5 rounded-lg border border-brand-border bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-colors"
               >
-                <div className="h-7 w-7 rounded-md bg-brand-blue text-white flex items-center justify-center font-bold text-xs uppercase shadow-sm">
+                <div className="h-6 w-6 rounded-md bg-brand-blue text-white flex items-center justify-center font-bold text-[11px] uppercase shadow-sm">
                   {initialUser.full_name
                     ? initialUser.full_name[0]
                     : initialUser.email
@@ -215,12 +213,12 @@ export function Navbar({ user: initialUser }: NavbarProps) {
           ) : (
             <Button
               asChild
-              size="default"
+              size="sm"
               variant="outline"
-              className="h-10 px-4 gap-2 font-bold text-brand-dark border-brand-border hover:border-brand-blue hover:text-brand-blue"
+              className="h-9 px-3.5 gap-1.5 font-bold text-brand-dark border-brand-border hover:border-brand-blue hover:text-brand-blue text-xs"
             >
               <Link href="/login">
-                <User className="h-4 w-4 text-brand-blue" />
+                <User className="h-3.5 w-3.5 text-brand-blue" />
                 <span>Login</span>
               </Link>
             </Button>
