@@ -186,3 +186,4 @@ export function PickupsClient({ pickups }: PickupsClientProps) {
     </div>
   );
 }
+

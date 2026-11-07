@@ -363,3 +363,4 @@ export function PickupDetailClient({ pickup }: PickupDetailClientProps) {
     </div>
   );
 }
+

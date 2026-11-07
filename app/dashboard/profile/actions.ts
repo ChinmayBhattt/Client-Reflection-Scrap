@@ -53,3 +53,4 @@ export async function updateProfile(formData: FormData) {
     return { success: false, error: message };
   }
 }
+

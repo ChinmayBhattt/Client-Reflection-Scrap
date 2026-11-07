@@ -28,3 +28,4 @@ export default async function PickupDetailPage({ params }: PickupPageProps) {
 
   return <PickupDetailClient pickup={pickup} />;
 }
+

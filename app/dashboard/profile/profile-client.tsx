@@ -125,3 +125,4 @@ export function ProfileClient({ user }: ProfileClientProps) {
     </Card>
   );
 }
+

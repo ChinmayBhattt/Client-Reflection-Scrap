@@ -21,12 +21,12 @@ export function Footer() {
           {/* Brand & Overview */}
           <div className="lg:col-span-2 space-y-4">
             <Link href="/" className="inline-flex items-center gap-3">
-              <div className="h-12 w-12 rounded-xl bg-white p-1.5 flex items-center justify-center shadow-md">
+              <div className="h-12 w-12 rounded-xl bg-white p-2 flex items-center justify-center shadow-md">
                 <Image
-                  src="/logo.png"
+                  src="/logo-icon.png"
                   alt="Reflection Scrap Solutions LLP"
-                  width={42}
-                  height={42}
+                  width={38}
+                  height={38}
                   className="h-full w-full object-contain"
                 />
               </div>

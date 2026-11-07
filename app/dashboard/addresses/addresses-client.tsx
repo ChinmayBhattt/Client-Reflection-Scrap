@@ -404,3 +404,4 @@ export function AddressesClient({ addresses }: AddressesClientProps) {
     </div>
   );
 }
+

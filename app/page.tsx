@@ -113,12 +113,12 @@ export default function HomePage() {
                 <div className="relative rounded-3xl border border-brand-border bg-white p-6 md:p-8 shadow-elevated">
                   <div className="flex items-center justify-between pb-6 border-b border-brand-border">
                     <div className="flex items-center gap-3">
-                      <div className="h-12 w-12 rounded-2xl bg-brand-blue-light p-1.5 flex items-center justify-center border border-brand-blue/20">
+                      <div className="h-12 w-12 rounded-2xl bg-brand-blue-light p-2 flex items-center justify-center border border-brand-blue/20">
                         <Image
-                          src="/logo.png"
+                          src="/logo-icon.png"
                           alt="Reflection Scrap Logo"
-                          width={44}
-                          height={44}
+                          width={40}
+                          height={40}
                           className="object-contain"
                         />
                       </div>

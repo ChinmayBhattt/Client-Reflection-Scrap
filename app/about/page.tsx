@@ -93,7 +93,7 @@ export default function AboutPage() {
               <div className="flex items-center gap-4 pb-6 border-b border-brand-border">
                 <div className="h-16 w-16 rounded-2xl bg-brand-blue-light p-2 flex items-center justify-center border border-brand-blue/20">
                   <Image
-                    src="/logo.png"
+                    src="/logo-icon.png"
                     alt="Reflection Scrap Solutions LLP"
                     width={56}
                     height={56}

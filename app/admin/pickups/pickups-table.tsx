@@ -614,3 +614,4 @@ export function PickupsTable({ pickups }: PickupsTableProps) {
     </div>
   );
 }
+

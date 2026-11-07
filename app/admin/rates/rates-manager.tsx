@@ -547,3 +547,4 @@ export function RatesManager({ categories, items }: RatesManagerProps) {
     </div>
   );
 }
+

@@ -14,3 +14,4 @@ export default async function SavedAddressesPage() {
 
   return <AddressesClient addresses={addresses} />;
 }
+

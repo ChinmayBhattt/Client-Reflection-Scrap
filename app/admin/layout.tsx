@@ -51,7 +51,7 @@ export default async function AdminLayout({
           <Link href="/admin" className="flex items-center gap-2.5">
             <div className="h-9 w-9 rounded-lg bg-white p-1 flex items-center justify-center">
               <Image
-                src="/logo.png"
+                src="/logo-icon.png"
                 alt="Logo"
                 width={30}
                 height={30}
