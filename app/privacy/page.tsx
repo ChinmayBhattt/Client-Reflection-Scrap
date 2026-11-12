@@ -19,15 +19,15 @@ export default function PrivacyPage() {
             Last Updated: November 2026 • Reflection Scrap Solutions LLP ({SITE_CONFIG.llpin})
           </p>
 
-          <div className="p-4 rounded-xl bg-amber-50 border border-amber-300 text-amber-900 text-xs flex items-center gap-3">
-            <AlertCircle className="h-5 w-5 text-amber-600 shrink-0" />
+          <div className="p-4 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-800/60 text-amber-900 dark:text-amber-200 text-xs flex items-center gap-3">
+            <AlertCircle className="h-5 w-5 text-amber-600 dark:text-amber-400 shrink-0" />
             <span>
               <strong>Notice:</strong> This is a standard template policy. Please review with legal counsel prior to formal commercial enforcement.
             </span>
           </div>
         </div>
 
-        <div className="space-y-8 bg-white p-8 md:p-12 rounded-3xl border border-brand-border text-sm leading-relaxed text-brand-dark shadow-subtle">
+        <div className="space-y-8 bg-brand-surface p-8 md:p-12 rounded-3xl border border-brand-border text-sm leading-relaxed text-brand-dark shadow-subtle">
           <section className="space-y-3">
             <h2 className="text-lg font-bold">1. Information We Collect</h2>
             <p className="text-brand-muted">

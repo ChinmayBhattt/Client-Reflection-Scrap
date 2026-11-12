@@ -13,9 +13,9 @@ const buttonVariants = cva(
         secondary:
           "bg-brand-green text-white hover:bg-brand-green-hover shadow-sm active:scale-[0.98]",
         outline:
-          "border border-brand-border bg-white text-brand-dark hover:bg-brand-blue-light hover:text-brand-blue hover:border-brand-blue",
+          "border border-brand-border bg-brand-surface text-brand-dark hover:bg-brand-blue-light hover:text-brand-blue hover:border-brand-blue",
         outlineGreen:
-          "border border-brand-green text-brand-green bg-white hover:bg-brand-green-light",
+          "border border-brand-green text-brand-green bg-brand-surface hover:bg-brand-green-light",
         ghost:
           "text-brand-dark hover:bg-brand-blue-light hover:text-brand-blue",
         destructive:

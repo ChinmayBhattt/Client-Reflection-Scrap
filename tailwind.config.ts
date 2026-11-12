@@ -1,7 +1,13 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  darkMode: ["class"],
+  darkMode: [
+    "variant",
+    [
+      "@media (prefers-color-scheme: dark) { &:not(:root:has(> head > meta[name=\"color-scheme\"][content=\"light\"]) *) }",
+      ":root:has(> head > meta[name=\"color-scheme\"][content=\"dark\"]) &",
+    ],
+  ],
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -22,51 +28,51 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          blue: "#3B8BC4",
-          "blue-hover": "#2e74a6",
-          "blue-light": "#eef6fb",
-          green: "#5BAE65",
-          "green-hover": "#4a9953",
-          "green-light": "#edf7ee",
-          dark: "#111111",
-          muted: "#555555",
-          border: "#E2E4DE",
-          surface: "#FFFFFF",
-          bg: "#FAFAF7",
+          blue: "rgb(var(--brand-blue) / <alpha-value>)",
+          "blue-hover": "rgb(var(--brand-blue-hover) / <alpha-value>)",
+          "blue-light": "rgb(var(--brand-blue-light) / <alpha-value>)",
+          green: "rgb(var(--brand-green) / <alpha-value>)",
+          "green-hover": "rgb(var(--brand-green-hover) / <alpha-value>)",
+          "green-light": "rgb(var(--brand-green-light) / <alpha-value>)",
+          dark: "rgb(var(--brand-dark) / <alpha-value>)",
+          muted: "rgb(var(--brand-muted) / <alpha-value>)",
+          border: "rgb(var(--brand-border) / <alpha-value>)",
+          surface: "rgb(var(--brand-surface) / <alpha-value>)",
+          bg: "rgb(var(--brand-bg) / <alpha-value>)",
         },
         primary: {
-          DEFAULT: "#3B8BC4",
+          DEFAULT: "rgb(var(--brand-blue) / <alpha-value>)",
           foreground: "#FFFFFF",
         },
         secondary: {
-          DEFAULT: "#5BAE65",
+          DEFAULT: "rgb(var(--brand-green) / <alpha-value>)",
           foreground: "#FFFFFF",
         },
         accent: {
-          DEFAULT: "#5BAE65",
+          DEFAULT: "rgb(var(--brand-green) / <alpha-value>)",
           foreground: "#FFFFFF",
         },
-        background: "#FAFAF7",
-        foreground: "#111111",
+        background: "rgb(var(--brand-bg) / <alpha-value>)",
+        foreground: "rgb(var(--brand-dark) / <alpha-value>)",
         card: {
-          DEFAULT: "#FFFFFF",
-          foreground: "#111111",
+          DEFAULT: "rgb(var(--brand-surface) / <alpha-value>)",
+          foreground: "rgb(var(--brand-dark) / <alpha-value>)",
         },
         popover: {
-          DEFAULT: "#FFFFFF",
-          foreground: "#111111",
+          DEFAULT: "rgb(var(--brand-surface) / <alpha-value>)",
+          foreground: "rgb(var(--brand-dark) / <alpha-value>)",
         },
         muted: {
-          DEFAULT: "#F1F2ED",
-          foreground: "#666666",
+          DEFAULT: "rgb(var(--muted-bg) / <alpha-value>)",
+          foreground: "rgb(var(--muted-fg) / <alpha-value>)",
         },
         destructive: {
           DEFAULT: "#E53E3E",
           foreground: "#FFFFFF",
         },
-        border: "#E2E4DE",
-        input: "#E2E4DE",
-        ring: "#3B8BC4",
+        border: "rgb(var(--brand-border) / <alpha-value>)",
+        input: "rgb(var(--brand-border) / <alpha-value>)",
+        ring: "rgb(var(--brand-blue) / <alpha-value>)",
       },
       fontFamily: {
         sans: ["var(--font-montserrat)", "sans-serif"],
@@ -87,4 +93,3 @@ const config: Config = {
 };
 
 export default config;
-

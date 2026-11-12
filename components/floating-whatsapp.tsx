@@ -9,7 +9,7 @@ export function FloatingWhatsApp() {
   )}`;
 
   return (
-    <aside aria-label="WhatsApp quick chat" className="fixed bottom-20 md:bottom-6 right-5 z-40">
+    <aside aria-label="WhatsApp quick chat" className="hidden md:block fixed bottom-6 right-5 z-40">
       <a
         href={whatsappUrl}
         target="_blank"
@@ -18,7 +18,7 @@ export function FloatingWhatsApp() {
         className="group flex items-center gap-2.5 bg-[#25D366] text-white px-3.5 py-3 rounded-full shadow-elevated hover:bg-[#20ba59] transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2"
       >
         <MessageCircle className="h-6 w-6 fill-white" />
-        <span className="hidden md:inline font-bold text-sm pr-1">
+        <span className="font-bold text-sm pr-1">
           WhatsApp Us
         </span>
       </a>

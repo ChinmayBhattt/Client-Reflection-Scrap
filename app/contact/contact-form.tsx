@@ -123,7 +123,7 @@ export function ContactForm() {
           id="message"
           rows={4}
           placeholder="Describe your scrap materials, approximate quantity, or commercial enquiry..."
-          className="flex w-full rounded-lg border border-brand-border bg-white p-3.5 text-sm text-brand-dark placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue disabled:cursor-not-allowed disabled:opacity-50"
+          className="flex w-full rounded-lg border border-brand-border bg-brand-surface p-3.5 text-sm text-brand-dark placeholder:text-brand-muted/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue disabled:cursor-not-allowed disabled:opacity-50"
           {...register("message")}
           aria-invalid={!!errors.message}
         />

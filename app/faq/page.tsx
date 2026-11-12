@@ -103,7 +103,7 @@ export default function FAQPage() {
                 {sec.items.map((faq, fIdx) => (
                   <div
                     key={fIdx}
-                    className="rounded-2xl border border-brand-border bg-white p-6 shadow-subtle space-y-2"
+                    className="rounded-2xl border border-brand-border bg-brand-surface p-6 shadow-subtle space-y-2"
                   >
                     <h3 className="font-bold text-base text-brand-dark flex items-start gap-2.5">
                       <HelpCircle className="h-5 w-5 text-brand-blue shrink-0 mt-0.5" />
@@ -120,19 +120,19 @@ export default function FAQPage() {
         </div>
 
         {/* Still have questions */}
-        <div className="rounded-3xl bg-white border border-brand-border p-8 text-center space-y-4 shadow-card">
-          <h3 className="text-xl font-bold text-brand-dark">
+        <div className="rounded-2xl sm:rounded-3xl bg-brand-surface border border-brand-border p-5 sm:p-8 text-center space-y-3 sm:space-y-4 shadow-card">
+          <h3 className="text-lg sm:text-xl font-bold text-brand-dark">
             Still have questions or need a custom quote?
           </h3>
-          <p className="text-sm text-brand-muted max-w-md mx-auto">
+          <p className="text-xs sm:text-sm text-brand-muted max-w-md mx-auto">
             Our team in MIDC Andheri East is available 7 days a week from 8:00 AM
             to 10:00 PM to assist you.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-            <Button asChild size="default" variant="default">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-3 pt-2 w-full sm:w-auto max-w-sm mx-auto">
+            <Button asChild size="default" variant="default" className="w-full sm:w-auto h-11 sm:h-12 font-bold text-xs sm:text-sm">
               <Link href="/contact">Contact Us</Link>
             </Button>
-            <Button asChild size="default" variant="outlineGreen">
+            <Button asChild size="default" variant="outlineGreen" className="w-full sm:w-auto h-11 sm:h-12 font-bold text-xs sm:text-sm">
               <a
                 href={`https://wa.me/${SITE_CONFIG.contact.whatsappRaw}?text=${encodeURIComponent(
                   SITE_CONFIG.contact.whatsappMessage

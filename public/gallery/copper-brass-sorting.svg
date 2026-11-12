@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#1B1926"/>
+  <circle cx="240" cy="270" r="140" fill="#F59E0B" fill-opacity="0.14"/>
+  <circle cx="560" cy="250" r="130" fill="#3B8BC4" fill-opacity="0.14"/>
+  <circle cx="265" cy="285" r="78" fill="#B45309" fill-opacity="0.3" stroke="#F59E0B" stroke-width="4"/>
+  <circle cx="265" cy="285" r="46" fill="#D97706" fill-opacity="0.35" stroke="#FBBF24" stroke-width="3"/>
+  <circle cx="515" cy="285" r="78" fill="#0F766E" fill-opacity="0.28" stroke="#5BAE65" stroke-width="4"/>
+  <circle cx="515" cy="285" r="46" fill="#3B8BC4" fill-opacity="0.3" stroke="#60A5FA" stroke-width="3"/>
+  <path d="M350 285H430" stroke="#E2E8F0" stroke-width="3" stroke-dasharray="8 6"/>
+  <text x="265" y="395" text-anchor="middle" fill="#FCD34D" font-family="system-ui, sans-serif" font-size="16" font-weight="700">COPPER &amp; BRASS</text>
+  <text x="515" y="395" text-anchor="middle" fill="#93C5FD" font-family="system-ui, sans-serif" font-size="16" font-weight="700">ALUMINIUM &amp; SS 304</text>
+  <text x="400" y="84" text-anchor="middle" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="24" font-weight="700">NON-FERROUS METAL GRADING</text>
+  <text x="400" y="112" text-anchor="middle" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Armature Copper, Honey Brass, Extrusions &amp; Industrial Alloy Segregation</text>
+</svg>
+

@@ -29,16 +29,16 @@ export const metadata: Metadata = {
 
 export default function WhatWeAcceptPage() {
   const categoryIcons: Record<string, React.ReactNode> = {
-    "iron-steel": <Hammer className="h-6 w-6 text-brand-blue" />,
-    copper: <Zap className="h-6 w-6 text-amber-500" />,
-    brass: <Coins className="h-6 w-6 text-yellow-600" />,
-    aluminium: <Layers className="h-6 w-6 text-slate-500" />,
-    "stainless-steel": <Shield className="h-6 w-6 text-sky-600" />,
-    plastic: <Package className="h-6 w-6 text-indigo-500" />,
-    "paper-cardboard": <FileText className="h-6 w-6 text-emerald-600" />,
-    ewaste: <Cpu className="h-6 w-6 text-cyan-600" />,
-    batteries: <BatteryCharging className="h-6 w-6 text-rose-500" />,
-    appliances: <Tv className="h-6 w-6 text-violet-600" />,
+    "iron-steel": <Hammer className="h-5 w-5 text-brand-blue" />,
+    copper: <Zap className="h-5 w-5 text-amber-500" />,
+    brass: <Coins className="h-5 w-5 text-yellow-600" />,
+    aluminium: <Layers className="h-5 w-5 text-slate-500 dark:text-slate-300" />,
+    "stainless-steel": <Shield className="h-5 w-5 text-sky-600 dark:text-sky-400" />,
+    plastic: <Package className="h-5 w-5 text-indigo-500 dark:text-indigo-400" />,
+    "paper-cardboard": <FileText className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />,
+    ewaste: <Cpu className="h-5 w-5 text-cyan-600 dark:text-cyan-400" />,
+    batteries: <BatteryCharging className="h-5 w-5 text-rose-500" />,
+    appliances: <Tv className="h-5 w-5 text-violet-600 dark:text-violet-400" />,
   };
 
   const nonAccepted = [
@@ -71,11 +71,11 @@ export default function WhatWeAcceptPage() {
             <Card
               key={cat.id}
               id={cat.id}
-              className="scroll-mt-28 border border-brand-border bg-white shadow-subtle hover:border-brand-blue hover:shadow-card transition-all duration-200 flex flex-col justify-between"
+              className="scroll-mt-28 border border-brand-border bg-brand-surface shadow-subtle hover:border-brand-blue hover:shadow-card transition-all duration-200 flex flex-col justify-between"
             >
               <CardHeader className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <div className="h-12 w-12 rounded-xl bg-gray-50 border border-brand-border flex items-center justify-center">
+                  <div className="h-10 w-10 rounded-xl bg-muted/70 border border-brand-border flex items-center justify-center">
                     {categoryIcons[cat.id]}
                   </div>
                   <Badge variant="success" className="text-[11px]">
@@ -114,12 +114,12 @@ export default function WhatWeAcceptPage() {
         </div>
 
         {/* What We Do NOT Accept */}
-        <div className="rounded-3xl border border-red-200 bg-red-50/60 p-8 md:p-10 shadow-subtle space-y-4">
-          <div className="flex items-center gap-3 text-red-700">
+        <div className="rounded-3xl border border-red-200 bg-red-50/60 dark:border-red-900/60 dark:bg-red-950/30 p-8 md:p-10 shadow-subtle space-y-4">
+          <div className="flex items-center gap-3 text-red-700 dark:text-red-400">
             <AlertTriangle className="h-6 w-6 shrink-0" />
             <h2 className="text-xl font-bold">Materials We Do NOT Accept</h2>
           </div>
-          <p className="text-sm text-red-900/80">
+          <p className="text-sm text-red-900/80 dark:text-red-200/80">
             For safety, environmental compliance, and legal regulations in Maharashtra,
             we strictly decline the following items:
           </p>
@@ -127,7 +127,7 @@ export default function WhatWeAcceptPage() {
             {nonAccepted.map((item, idx) => (
               <div
                 key={idx}
-                className="flex items-start gap-2.5 text-xs md:text-sm text-red-800 bg-white/70 p-3 rounded-xl border border-red-100"
+                className="flex items-start gap-2.5 text-xs md:text-sm text-red-800 dark:text-red-200 bg-brand-surface/80 p-3 rounded-xl border border-red-100 dark:border-red-900/50"
               >
                 <span className="font-bold text-red-600">•</span>
                 <span>{item}</span>
@@ -137,18 +137,18 @@ export default function WhatWeAcceptPage() {
         </div>
 
         {/* Call to action */}
-        <div className="text-center space-y-4">
-          <h3 className="text-2xl font-bold text-brand-dark">
+        <div className="text-center space-y-3 sm:space-y-4 max-w-md mx-auto">
+          <h3 className="text-xl sm:text-2xl font-bold text-brand-dark">
             Have materials ready to weigh and sell?
           </h3>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Button asChild size="lg" variant="default">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-3 w-full">
+            <Button asChild size="default" variant="default" className="w-full sm:w-auto h-11 sm:h-12 font-bold text-xs sm:text-sm shadow-sm">
               <Link href="/book">
                 <CalendarCheck className="h-4 w-4 mr-2" />
                 <span>Book a Doorstep Pickup</span>
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline">
+            <Button asChild size="default" variant="outline" className="w-full sm:w-auto h-11 sm:h-12 font-bold text-xs sm:text-sm">
               <Link href="/rates">
                 <span>Check Rates & Estimate Value</span>
               </Link>

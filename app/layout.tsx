@@ -17,7 +17,10 @@ const montserrat = Montserrat({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#3B8BC4",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#3B8BC4" },
+    { media: "(prefers-color-scheme: dark)", color: "#0F1724" },
+  ],
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -143,11 +146,18 @@ export default async function RootLayout({
       name: "Mumbai",
     },
     paymentAccepted: ["Cash", "UPI"],
+    sameAs: SITE_CONFIG.socials.map((social) => social.href),
   };
 
   return (
     <html lang="en" className={montserrat.variable}>
       <head>
+        <meta name="color-scheme" content="light dark" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var s=localStorage.getItem("color-scheme");if(s==="light"||s==="dark"){document.querySelector('meta[name="color-scheme"]').content=s;}}catch(e){}`,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -157,7 +167,7 @@ export default async function RootLayout({
       </head>
       <body className="font-sans min-h-screen flex flex-col bg-brand-bg text-brand-dark selection:bg-brand-blue selection:text-white">
         <Navbar user={user} />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 pb-16 md:pb-0">{children}</main>
         <Footer />
         <FloatingWhatsApp />
         <MobileCallBar />

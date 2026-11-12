@@ -12,6 +12,8 @@ import {
   ShieldAlert,
   ArrowLeft,
   ExternalLink,
+  Newspaper,
+  Camera,
 } from "lucide-react";
 import { getCurrentUser } from "@/lib/services/user";
 import { Button } from "@/components/ui/button";
@@ -38,6 +40,8 @@ export default async function AdminLayout({
     { href: "/admin", label: "Overview", icon: LayoutDashboard },
     { href: "/admin/pickups", label: "Pickups & Dispatches", icon: Truck },
     { href: "/admin/rates", label: "Scrap Rates & Items", icon: TrendingUp },
+    { href: "/admin/blog", label: "Blog & Market Trends", icon: Newspaper },
+    { href: "/admin/gallery", label: "Work Gallery", icon: Camera },
     { href: "/admin/enquiries", label: "Contact Enquiries", icon: Mail },
     { href: "/admin/service-areas", label: "Service Areas (Pincodes)", icon: MapPin },
     { href: "/admin/customers", label: "Customer Accounts", icon: Users },

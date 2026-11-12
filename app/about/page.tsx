@@ -89,9 +89,9 @@ export default function AboutPage() {
           </div>
 
           <div className="lg:col-span-6">
-            <Card className="border border-brand-border bg-white shadow-elevated p-8 rounded-3xl space-y-6">
+            <Card className="border border-brand-border bg-brand-surface shadow-elevated p-8 rounded-3xl space-y-6">
               <div className="flex items-center gap-4 pb-6 border-b border-brand-border">
-                <div className="h-16 w-16 rounded-2xl bg-brand-blue-light p-2 flex items-center justify-center border border-brand-blue/20">
+                <div className="h-16 w-16 rounded-2xl bg-white p-2 flex items-center justify-center border border-brand-border">
                   <Image
                     src="/logo-icon.png"
                     alt="Reflection Scrap Solutions LLP"
@@ -185,7 +185,7 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="rounded-2xl border border-brand-border bg-white p-6 shadow-subtle space-y-3">
+            <div className="rounded-2xl border border-brand-border bg-brand-surface p-6 shadow-subtle space-y-3">
               <div className="h-10 w-10 rounded-xl bg-brand-blue-light text-brand-blue flex items-center justify-center font-bold">
                 <Scale className="h-5 w-5" />
               </div>
@@ -198,7 +198,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="rounded-2xl border border-brand-border bg-white p-6 shadow-subtle space-y-3">
+            <div className="rounded-2xl border border-brand-border bg-brand-surface p-6 shadow-subtle space-y-3">
               <div className="h-10 w-10 rounded-xl bg-brand-green-light text-brand-green flex items-center justify-center font-bold">
                 <Recycle className="h-5 w-5" />
               </div>
@@ -211,7 +211,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="rounded-2xl border border-brand-border bg-white p-6 shadow-subtle space-y-3">
+            <div className="rounded-2xl border border-brand-border bg-brand-surface p-6 shadow-subtle space-y-3">
               <div className="h-10 w-10 rounded-xl bg-brand-blue-light text-brand-blue flex items-center justify-center font-bold">
                 <ShieldCheck className="h-5 w-5" />
               </div>

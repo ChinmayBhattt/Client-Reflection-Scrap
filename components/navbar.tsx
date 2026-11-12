@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/site-config";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
 
 interface NavbarProps {
@@ -51,7 +52,9 @@ export function Navbar({ user: initialUser }: NavbarProps) {
     { href: "/", label: "Home" },
     { href: "/services", label: "Services" },
     { href: "/rates", label: "Scrap Rates" },
-    { href: "/what-we-accept", label: "What We Accept" },
+    { href: "/what-we-accept", label: "Accept" },
+    { href: "/gallery", label: "Gallery" },
+    { href: "/blog", label: "Blog" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ];
@@ -62,7 +65,7 @@ export function Navbar({ user: initialUser }: NavbarProps) {
         "sticky top-0 z-40 w-full transition-all duration-200 border-b",
         scrolled
           ? "glass-nav border-brand-border/90 shadow-subtle py-2"
-          : "bg-white/95 backdrop-blur-md border-brand-border py-2.5 sm:py-3"
+          : "bg-brand-surface/95 backdrop-blur-md border-brand-border py-2.5 sm:py-3"
       )}
     >
       <div className="container max-w-7xl mx-auto flex items-center justify-between gap-2 lg:gap-4">
@@ -83,10 +86,10 @@ export function Navbar({ user: initialUser }: NavbarProps) {
               />
             </div>
             <div className="flex flex-col text-left">
-              <span className="font-extrabold text-base md:text-lg leading-none tracking-tight text-brand-dark whitespace-nowrap">
+              <span className="font-extrabold text-sm sm:text-base md:text-lg leading-none tracking-tight text-brand-dark whitespace-nowrap">
                 Reflection <span className="text-brand-blue">Scrap</span>
               </span>
-              <span className="text-[10px] md:text-[11px] font-bold tracking-wider uppercase text-brand-green mt-1 whitespace-nowrap">
+              <span className="text-[9px] sm:text-[10px] md:text-[11px] font-bold tracking-wider uppercase text-brand-green mt-0.5 sm:mt-1 whitespace-nowrap">
                 Solutions LLP
               </span>
             </div>
@@ -94,7 +97,7 @@ export function Navbar({ user: initialUser }: NavbarProps) {
         </div>
 
         {/* 2. DESKTOP NAVIGATION LINKS (Centered - shrink-0) */}
-        <nav className="hidden lg:flex items-center justify-center gap-0.5 xl:gap-1.5 shrink-0">
+        <nav className="hidden lg:flex items-center justify-center gap-0.5 xl:gap-1 shrink-0">
           {navLinks.map((link) => {
             const isActive =
               link.href === "/"
@@ -105,10 +108,10 @@ export function Navbar({ user: initialUser }: NavbarProps) {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "px-2.5 xl:px-3 py-1.5 rounded-lg text-xs xl:text-[13px] font-semibold transition-all duration-150 whitespace-nowrap",
+                  "px-2 xl:px-2.5 py-1.5 rounded-lg text-xs xl:text-[13px] font-semibold transition-all duration-150 whitespace-nowrap",
                   isActive
                     ? "text-brand-blue bg-brand-blue-light font-bold"
-                    : "text-brand-dark/80 hover:text-brand-blue hover:bg-gray-100/80"
+                    : "text-brand-dark/80 hover:text-brand-blue hover:bg-muted/80"
                 )}
               >
                 {link.label}
@@ -118,7 +121,9 @@ export function Navbar({ user: initialUser }: NavbarProps) {
         </nav>
 
         {/* 3. DESKTOP ACTIONS (Right side - flex-1 justify-end) */}
-        <div className="hidden lg:flex flex-1 items-center justify-end gap-2 xl:gap-2.5 shrink-0">
+        <div className="hidden lg:flex flex-1 items-center justify-end gap-2 shrink-0">
+          <ThemeToggle />
+
           {/* Quick Call */}
           <a
             href={`tel:${SITE_CONFIG.contact.phoneRaw}`}
@@ -128,7 +133,7 @@ export function Navbar({ user: initialUser }: NavbarProps) {
             <div className="h-5 w-5 rounded-full bg-brand-blue-light text-brand-blue flex items-center justify-center shrink-0">
               <Phone className="h-3 w-3" />
             </div>
-            <span className="hidden xl:inline text-xs font-bold whitespace-nowrap">
+            <span className="hidden 2xl:inline text-xs font-bold whitespace-nowrap">
               {SITE_CONFIG.contact.phone}
             </span>
           </a>
@@ -152,7 +157,7 @@ export function Navbar({ user: initialUser }: NavbarProps) {
               <button
                 type="button"
                 onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                className="flex items-center gap-2 h-9 px-2.5 rounded-lg border border-brand-border bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-colors"
+                className="flex items-center gap-2 h-9 px-2.5 rounded-lg border border-brand-border bg-brand-surface hover:bg-muted/70 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-colors"
               >
                 <div className="h-6 w-6 rounded-md bg-brand-blue text-white flex items-center justify-center font-bold text-[11px] uppercase shadow-sm">
                   {initialUser.full_name
@@ -167,7 +172,7 @@ export function Navbar({ user: initialUser }: NavbarProps) {
               </button>
 
               {userDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-52 rounded-2xl border border-brand-border bg-white p-2 shadow-elevated z-50 animate-in fade-in-0 zoom-in-95 duration-150">
+                <div className="absolute right-0 mt-2 w-52 rounded-2xl border border-brand-border bg-brand-surface p-2 shadow-elevated z-50 animate-in fade-in-0 zoom-in-95 duration-150">
                   <div className="px-3 py-2 border-b border-brand-border/60">
                     <p className="text-xs font-bold text-brand-dark truncate">
                       {initialUser.full_name || "My Account"}
@@ -226,8 +231,10 @@ export function Navbar({ user: initialUser }: NavbarProps) {
         </div>
 
         {/* MOBILE CONTROLS (Right side on mobile) */}
-        <div className="flex items-center gap-2 lg:hidden">
-          <Button asChild size="sm" variant="secondary" className="h-9 px-3 gap-1.5 text-xs font-bold shadow-sm">
+        <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden shrink-0">
+          <ThemeToggle />
+
+          <Button asChild size="sm" variant="secondary" className="h-8 sm:h-9 px-2.5 sm:px-3 gap-1 text-[11px] sm:text-xs font-bold shadow-sm">
             <Link href="/book">
               <CalendarCheck className="h-3.5 w-3.5" />
               <span>Book</span>
@@ -237,18 +244,18 @@ export function Navbar({ user: initialUser }: NavbarProps) {
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className="h-9 w-9 flex items-center justify-center rounded-lg border border-brand-border text-brand-dark hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-blue"
+            className="h-8 w-8 sm:h-9 sm:w-9 flex items-center justify-center rounded-lg border border-brand-border bg-brand-surface text-brand-dark hover:bg-muted/80 focus:outline-none focus:ring-2 focus:ring-brand-blue"
             aria-label="Toggle navigation menu"
             aria-expanded={isOpen}
           >
-            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {isOpen ? <X className="h-4 w-4 sm:h-5 sm:w-5" /> : <Menu className="h-4 w-4 sm:h-5 sm:w-5" />}
           </button>
         </div>
       </div>
 
       {/* MOBILE DRAWER */}
       {isOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-full bg-white border-b border-brand-border shadow-elevated animate-in slide-in-from-top-2 duration-200">
+        <div className="lg:hidden fixed inset-x-0 top-full bg-brand-surface border-b border-brand-border shadow-elevated animate-in slide-in-from-top-2 duration-200 max-h-[82vh] overflow-y-auto">
           <div className="container py-4 flex flex-col space-y-2">
             {navLinks.map((link) => {
               const isActive =
@@ -263,7 +270,7 @@ export function Navbar({ user: initialUser }: NavbarProps) {
                     "px-4 py-3 rounded-xl text-base font-semibold flex items-center justify-between",
                     isActive
                       ? "text-brand-blue bg-brand-blue-light font-bold"
-                      : "text-brand-dark hover:bg-gray-50"
+                      : "text-brand-dark hover:bg-muted/70"
                   )}
                   onClick={() => setIsOpen(false)}
                 >
@@ -319,7 +326,7 @@ export function Navbar({ user: initialUser }: NavbarProps) {
               )}
 
               {/* Mobile Direct Call & Info */}
-              <div className="mt-2 p-3 rounded-xl bg-gray-50 border border-brand-border flex items-center justify-between text-xs">
+              <div className="mt-2 p-3 rounded-xl bg-muted/60 border border-brand-border flex items-center justify-between text-xs">
                 <div>
                   <p className="font-bold text-brand-dark">MIDC Andheri East, Mumbai</p>
                   <p className="text-brand-muted">8:00 AM – 10:00 PM (Daily)</p>

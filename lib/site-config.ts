@@ -32,15 +32,34 @@ export const SITE_CONFIG = {
     closes: "22:00",
   },
 
-  // Contact Information (Configurable placeholders)
+  // Contact Information
   contact: {
-    phone: "+91 98200 12345", // Replace with registered phone
-    phoneRaw: "+919820012345",
-    whatsapp: "+91 98200 12345", // Replace with registered WhatsApp
-    whatsappRaw: "919820012345",
+    phone: "+91 77389 88646",
+    phoneRaw: "+917738988646",
+    whatsapp: "+91 77389 88646",
+    whatsappRaw: "917738988646",
     email: "contact@reflectionscrap.com",
     whatsappMessage: "Hello Reflection Scrap Solutions, I would like to schedule a scrap pickup.",
   },
+
+  // Social Media Profiles
+  socials: [
+    {
+      id: "facebook" as const,
+      name: "Facebook",
+      href: "https://www.facebook.com/profile.php?id=61596607254528",
+    },
+    {
+      id: "instagram" as const,
+      name: "Instagram",
+      href: "https://www.instagram.com/reflectionscrapsolutions/",
+    },
+    {
+      id: "linkedin" as const,
+      name: "LinkedIn",
+      href: "https://www.linkedin.com/company/reflection-scrap-solutions-llp/",
+    },
+  ],
 
   // Core Services
   services: [
@@ -97,6 +116,15 @@ export const SITE_CONFIG = {
       fullDescription:
         "Tailored contracts for industrial waste, decommissioned machinery, structural metal beams, construction scrap, and warehouse inventory clearances across Mumbai.",
       icon: "Building2",
+    },
+    {
+      id: "demolition-dismantling",
+      title: "Demolition & Dismantling",
+      shortDescription:
+        "Corporate office stripping, industrial plant dismantling, and structural demolition with full scrap recovery.",
+      fullDescription:
+        "Safe, end-to-end demolition and soft-strip dismantling for corporate offices, IT parks, factories, warehouses, and commercial complexes. We handle partition and false-ceiling removal, HVAC/MEP stripping, heavy machinery dismantling, and steel structure clearance—paying top scrap value for all recovered materials.",
+      icon: "HardHat",
     },
   ],
 

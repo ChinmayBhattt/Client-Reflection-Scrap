@@ -4,26 +4,83 @@
 
 @layer base {
   :root {
-    --background: 48 20% 97%; /* #FAFAF7 */
-    --foreground: 0 0% 7%;    /* #111111 */
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 7%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 7%;
-    --primary: 205 53% 50%;    /* #3B8BC4 */
-    --primary-foreground: 0 0% 100%;
-    --secondary: 128 33% 52%;  /* #5BAE65 */
-    --secondary-foreground: 0 0% 100%;
-    --muted: 50 10% 94%;
-    --muted-foreground: 0 0% 40%;
-    --accent: 128 33% 52%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 50 10% 88%;
-    --input: 50 10% 88%;
-    --ring: 205 53% 50%;
+    color-scheme: light dark;
+
+    /* Light palette (RGB channels for Tailwind alpha modifier support) */
+    --brand-blue: 59 139 196;         /* #3B8BC4 */
+    --brand-blue-hover: 46 116 166;   /* #2E74A6 */
+    --brand-blue-light: 238 246 251;  /* #EEF6FB */
+    --brand-green: 91 174 101;        /* #5BAE65 */
+    --brand-green-hover: 74 153 83;   /* #4A9953 */
+    --brand-green-light: 237 247 238; /* #EDF7EE */
+    --brand-dark: 17 17 17;           /* #111111 */
+    --brand-muted: 85 85 85;          /* #555555 */
+    --brand-border: 226 228 222;      /* #E2E4DE */
+    --brand-surface: 255 255 255;     /* #FFFFFF */
+    --brand-bg: 250 250 247;          /* #FAFAF7 */
+    --muted-bg: 241 242 237;          /* #F1F2ED */
+    --muted-fg: 102 102 102;          /* #666666 */
+
+    /* Scrollbar tokens with light-dark() + fallback */
+    --scrollbar-track-light: #f1f2ed;
+    --scrollbar-track-dark: #111827;
+    --scrollbar-thumb-light: #cbd0c8;
+    --scrollbar-thumb-dark: #475569;
+    --scrollbar-track: var(--scrollbar-track-light);
+    --scrollbar-thumb: var(--scrollbar-thumb-light);
+
     --radius: 0.75rem;
+    accent-color: rgb(var(--brand-blue));
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not(:has(> head > meta[name="color-scheme"][content="light"])) {
+      --brand-blue: 82 162 219;
+      --brand-blue-hover: 59 139 196;
+      --brand-blue-light: 23 43 66;
+      --brand-green: 102 194 113;
+      --brand-green-hover: 83 173 94;
+      --brand-green-light: 20 51 32;
+      --brand-dark: 241 245 249;
+      --brand-muted: 156 168 184;
+      --brand-border: 51 65 85;
+      --brand-surface: 24 33 47;
+      --brand-bg: 15 23 36;
+      --muted-bg: 30 41 59;
+      --muted-fg: 148 163 184;
+      --scrollbar-track: var(--scrollbar-track-dark);
+      --scrollbar-thumb: var(--scrollbar-thumb-dark);
+    }
+  }
+
+  :root:has(> head > meta[name="color-scheme"][content="dark"]) {
+    color-scheme: dark;
+    --brand-blue: 82 162 219;
+    --brand-blue-hover: 59 139 196;
+    --brand-blue-light: 23 43 66;
+    --brand-green: 102 194 113;
+    --brand-green-hover: 83 173 94;
+    --brand-green-light: 20 51 32;
+    --brand-dark: 241 245 249;
+    --brand-muted: 156 168 184;
+    --brand-border: 51 65 85;
+    --brand-surface: 24 33 47;
+    --brand-bg: 15 23 36;
+    --muted-bg: 30 41 59;
+    --muted-fg: 148 163 184;
+    --scrollbar-track: var(--scrollbar-track-dark);
+    --scrollbar-thumb: var(--scrollbar-thumb-dark);
+  }
+
+  :root:has(> head > meta[name="color-scheme"][content="light"]) {
+    color-scheme: light;
+  }
+
+  @supports (color: light-dark(white, black)) {
+    :root {
+      --scrollbar-track: light-dark(var(--scrollbar-track-light), var(--scrollbar-track-dark));
+      --scrollbar-thumb: light-dark(var(--scrollbar-thumb-light), var(--scrollbar-thumb-dark));
+    }
   }
 
   * {
@@ -33,37 +90,81 @@
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
+    max-width: 100vw;
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased min-h-screen flex flex-col;
-    background-color: #FAFAF7;
-    color: #111111;
+    background-color: rgb(var(--brand-bg));
+    color: rgb(var(--brand-dark));
+    overflow-x: hidden;
+    max-width: 100vw;
+    width: 100%;
   }
 }
 
-/* Custom scrollbars */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
+/* Legacy fallback for browsers without standard scrollbar-color */
+@supports not (scrollbar-color: auto) {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
 
-::-webkit-scrollbar-track {
-  background: #f1f2ed;
-}
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
 
-::-webkit-scrollbar-thumb {
-  background: #cbd0c8;
-  border-radius: 4px;
-}
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 4px;
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #3B8BC4;
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--brand-blue));
+  }
 }
 
 /* Glass effect utilities */
 .glass-nav {
-  background: rgba(250, 250, 247, 0.88);
+  background: rgb(var(--brand-surface) / 0.88);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+}
+
+/* Theme toggle icon visibility driven by CSS without JS state flash */
+.theme-toggle-sun {
+  display: none;
+}
+
+.theme-toggle-moon {
+  display: inline-flex;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(:has(> head > meta[name="color-scheme"][content="light"])) .theme-toggle-sun {
+    display: inline-flex;
+  }
+
+  :root:not(:has(> head > meta[name="color-scheme"][content="light"])) .theme-toggle-moon {
+    display: none;
+  }
+}
+
+:root:has(> head > meta[name="color-scheme"][content="dark"]) .theme-toggle-sun {
+  display: inline-flex;
+}
+
+:root:has(> head > meta[name="color-scheme"][content="dark"]) .theme-toggle-moon {
+  display: none;
+}
+
+:root:has(> head > meta[name="color-scheme"][content="light"]) .theme-toggle-sun {
+  display: none;
+}
+
+:root:has(> head > meta[name="color-scheme"][content="light"]) .theme-toggle-moon {
+  display: inline-flex;
 }

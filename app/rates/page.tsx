@@ -21,17 +21,17 @@ export default async function ScrapRatesPage() {
   ]);
 
   return (
-    <div className="py-12 md:py-20 bg-brand-bg min-h-screen">
-      <div className="container space-y-12">
+    <div className="py-6 sm:py-12 md:py-20 bg-brand-bg min-h-screen">
+      <div className="container px-4 sm:px-6 space-y-6 sm:space-y-12">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4">
-          <Badge variant="blue" className="px-3.5 py-1 text-xs font-bold uppercase tracking-wider">
+        <div className="text-center max-w-3xl mx-auto space-y-2 sm:space-y-4">
+          <Badge variant="blue" className="px-3 py-0.5 text-[11px] sm:text-xs font-bold uppercase tracking-wider">
             Daily Market Rates & Calculator
           </Badge>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-brand-dark tracking-tight">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-brand-dark tracking-tight">
             Mumbai Scrap Rates & Payout Calculator
           </h1>
-          <p className="text-base md:text-lg text-brand-muted leading-relaxed">
+          <p className="text-xs sm:text-base md:text-lg text-brand-muted leading-relaxed">
             Transparent pricing based on verified digital scale measurements.
             Check item rates below or use our interactive calculator to estimate
             your total payout.
@@ -42,24 +42,24 @@ export default async function ScrapRatesPage() {
         <RatesClient categories={categories} items={items} />
 
         {/* Bottom CTA Card */}
-        <div className="rounded-3xl bg-white border border-brand-border p-8 md:p-12 shadow-subtle flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-2 text-center md:text-left">
-            <h3 className="text-2xl font-bold text-brand-dark">
+        <div className="rounded-2xl sm:rounded-3xl bg-brand-surface border border-brand-border p-5 sm:p-8 md:p-12 shadow-subtle flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6">
+          <div className="space-y-1.5 sm:space-y-2 text-center md:text-left">
+            <h3 className="text-lg sm:text-2xl font-bold text-brand-dark leading-tight">
               Have bulk metal, factory offcuts, or corporate e-waste?
             </h3>
-            <p className="text-sm text-brand-muted max-w-xl">
+            <p className="text-xs sm:text-sm text-brand-muted max-w-xl leading-relaxed">
               We provide commercial contracts with customized weighbridge slips
               and direct high-volume industrial payouts across Mumbai.
             </p>
           </div>
-          <div className="flex items-center gap-3 shrink-0">
-            <Button asChild size="lg" variant="default">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto shrink-0">
+            <Button asChild size="default" variant="default" className="w-full sm:w-auto h-11 sm:h-12 font-bold text-xs sm:text-sm shadow-sm">
               <Link href="/book">
                 <CalendarCheck className="h-4 w-4 mr-2" />
                 <span>Book a Pickup</span>
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline">
+            <Button asChild size="default" variant="outline" className="w-full sm:w-auto h-11 sm:h-12 font-bold text-xs sm:text-sm">
               <Link href="/contact">Contact Our Office</Link>
             </Button>
           </div>

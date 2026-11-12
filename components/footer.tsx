@@ -10,6 +10,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/site-config";
+import { SocialLinks } from "@/components/social-links";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -50,6 +51,13 @@ export function Footer() {
               <ShieldCheck className="h-4 w-4 text-brand-green" />
               <span>Registered Entity: <strong>{SITE_CONFIG.llpin}</strong></span>
             </div>
+
+            <div className="pt-1 space-y-2">
+              <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">
+                Connect With Us
+              </p>
+              <SocialLinks variant="dark" />
+            </div>
           </div>
 
           {/* Quick Links */}
@@ -88,6 +96,22 @@ export function Footer() {
                   className="hover:text-brand-blue transition-colors flex items-center gap-1"
                 >
                   What We Accept
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/gallery"
+                  className="hover:text-brand-blue transition-colors flex items-center gap-1"
+                >
+                  Work Gallery
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/blog"
+                  className="hover:text-brand-blue transition-colors flex items-center gap-1"
+                >
+                  Market Trends Blog
                 </Link>
               </li>
               <li>

@@ -9,6 +9,7 @@ import {
   CalendarCheck,
 } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/site-config";
+import { SocialLinks } from "@/components/social-links";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -43,7 +44,7 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Column: Contact Form */}
           <div className="lg:col-span-7">
-            <Card className="border border-brand-border bg-white shadow-card rounded-3xl p-6 md:p-8 space-y-6">
+            <Card className="border border-brand-border bg-brand-surface shadow-card rounded-3xl p-6 md:p-8 space-y-6">
               <div>
                 <CardTitle className="text-2xl font-bold text-brand-dark">
                   Send an Enquiry
@@ -59,7 +60,7 @@ export default function ContactPage() {
 
           {/* Right Column: Direct Contact & Location */}
           <div className="lg:col-span-5 space-y-6">
-            <Card className="border border-brand-border bg-white shadow-subtle rounded-3xl p-6 md:p-8 space-y-6">
+            <Card className="border border-brand-border bg-brand-surface shadow-subtle rounded-3xl p-6 md:p-8 space-y-6">
               <div className="space-y-1">
                 <h2 className="text-xl font-bold text-brand-dark">
                   Direct Contact & Yard Info
@@ -136,7 +137,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-3.5">
-                  <div className="h-10 w-10 shrink-0 rounded-xl bg-gray-100 text-brand-dark flex items-center justify-center font-bold">
+                  <div className="h-10 w-10 shrink-0 rounded-xl bg-muted text-brand-dark flex items-center justify-center font-bold">
                     <Mail className="h-5 w-5" />
                   </div>
                   <div>
@@ -149,6 +150,13 @@ export default function ContactPage() {
                     </a>
                   </div>
                 </div>
+              </div>
+
+              <div className="pt-4 border-t border-brand-border space-y-2.5">
+                <span className="block text-xs font-bold uppercase tracking-wider text-brand-muted">
+                  Follow Us
+                </span>
+                <SocialLinks variant="light" showLabels />
               </div>
             </Card>
 
@@ -176,7 +184,7 @@ export default function ContactPage() {
             </span>
           </div>
 
-          <div className="relative w-full h-[400px] rounded-3xl overflow-hidden border border-brand-border shadow-card bg-gray-100">
+          <div className="relative w-full h-[400px] rounded-3xl overflow-hidden border border-brand-border shadow-card bg-muted">
             <iframe
               src={SITE_CONFIG.address.googleMapsEmbedUrl}
               width="100%"

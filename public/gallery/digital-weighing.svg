@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#132238"/>
+  <circle cx="160" cy="140" r="110" fill="#3B8BC4" fill-opacity="0.16"/>
+  <circle cx="640" cy="360" r="140" fill="#5BAE65" fill-opacity="0.14"/>
+  <rect x="220" y="150" width="360" height="190" rx="22" fill="#1E293B" stroke="#3B8BC4" stroke-width="3"/>
+  <rect x="255" y="185" width="290" height="85" rx="12" fill="#0F172A" stroke="#5BAE65" stroke-opacity="0.6" stroke-width="2"/>
+  <text x="400" y="240" text-anchor="middle" fill="#5BAE65" font-family="ui-monospace, monospace" font-size="40" font-weight="800">248.50 KG</text>
+  <rect x="255" y="290" width="130" height="24" rx="6" fill="#3B8BC4" fill-opacity="0.35"/>
+  <rect x="405" y="290" width="140" height="24" rx="6" fill="#5BAE65" fill-opacity="0.35"/>
+  <rect x="170" y="370" width="460" height="26" rx="13" fill="#334155"/>
+  <text x="400" y="84" text-anchor="middle" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="24" font-weight="700">CALIBRATED DIGITAL WEIGHING</text>
+  <text x="400" y="112" text-anchor="middle" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="14" font-weight="600">100% Transparent On-Spot Digital Scale Readings &amp; Instant UPI Payout</text>
+</svg>
+

@@ -125,3 +125,38 @@ export interface Enquiry {
   is_replied: boolean;
   created_at: string;
 }
+
+export interface BlogPost {
+  id: string;
+  slug: string;
+  title: string;
+  category: string;
+  excerpt: string;
+  content: string;
+  cover_image_url: string | null;
+  author_name: string;
+  read_time_minutes: number;
+  tags: string[];
+  likes_count: number;
+  rating_sum: number;
+  rating_count: number;
+  is_published: boolean;
+  published_at: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface GalleryItem {
+  id: string;
+  title: string;
+  category: string;
+  description: string | null;
+  location: string | null;
+  activity_date: string | null;
+  image_url: string | null;
+  highlight_stat: string | null;
+  is_published: boolean;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+}
