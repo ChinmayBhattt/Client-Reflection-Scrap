@@ -38,7 +38,7 @@ export const SITE_CONFIG = {
     phoneRaw: "+917738988646",
     whatsapp: "+91 77389 88646",
     whatsappRaw: "917738988646",
-    email: "contact@reflectionscrap.com",
+    email: "info@reflectionscrap.com",
     whatsappMessage: "Hello Reflection Scrap Solutions, I would like to schedule a scrap pickup.",
   },
 
