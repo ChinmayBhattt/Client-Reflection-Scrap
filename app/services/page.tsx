@@ -25,13 +25,13 @@ export const metadata: Metadata = {
 
 export default function ServicesPage() {
   const serviceIcons: Record<string, React.ReactNode> = {
-    "waste-collection": <Trash2 className="h-5 w-5 text-brand-blue" />,
-    "scrap-trading": <TrendingUp className="h-5 w-5 text-brand-blue" />,
-    "recycling": <Recycle className="h-5 w-5 text-brand-green" />,
-    "doorstep-pickup": <Scale className="h-5 w-5 text-brand-blue" />,
-    "ewaste-and-electronics": <Cpu className="h-5 w-5 text-brand-green" />,
-    "bulk-commercial-scrap": <Building2 className="h-5 w-5 text-brand-blue" />,
-    "demolition-dismantling": <HardHat className="h-5 w-5 text-brand-green" />,
+    "waste-collection": <Trash2 className="h-4 w-4 text-brand-blue" />,
+    "scrap-trading": <TrendingUp className="h-4 w-4 text-brand-blue" />,
+    "recycling": <Recycle className="h-4 w-4 text-brand-green" />,
+    "doorstep-pickup": <Scale className="h-4 w-4 text-brand-blue" />,
+    "ewaste-and-electronics": <Cpu className="h-4 w-4 text-brand-green" />,
+    "bulk-commercial-scrap": <Building2 className="h-4 w-4 text-brand-blue" />,
+    "demolition-dismantling": <HardHat className="h-4 w-4 text-brand-green" />,
   };
 
   return (
@@ -61,7 +61,7 @@ export default function ServicesPage() {
               className="scroll-mt-28 border border-brand-border bg-brand-surface shadow-subtle hover:border-brand-blue transition-all duration-200 flex flex-col justify-between"
             >
               <CardHeader className="space-y-3.5">
-                <div className="h-11 w-11 rounded-xl bg-brand-blue-light flex items-center justify-center">
+                <div className="h-9 w-9 rounded-lg bg-brand-blue-light flex items-center justify-center">
                   {serviceIcons[svc.id]}
                 </div>
                 <div>

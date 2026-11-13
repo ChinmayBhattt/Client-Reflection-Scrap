@@ -73,7 +73,7 @@ export default function PrivacyPage() {
               <p className="font-bold text-brand-dark">{SITE_CONFIG.name}</p>
               <p className="text-brand-muted">{SITE_CONFIG.address.full}</p>
               <p className="text-brand-muted">Email: {SITE_CONFIG.contact.email}</p>
-              <p className="text-brand-muted">Phone: {SITE_CONFIG.contact.phone}</p>
+              <p className="text-brand-muted">Phone: {SITE_CONFIG.contact.phone} / {SITE_CONFIG.contact.phoneSecondary}</p>
             </div>
           </section>
         </div>

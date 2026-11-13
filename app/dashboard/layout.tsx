@@ -101,12 +101,20 @@ export default async function DashboardLayout({
                 Visit our MIDC Andheri East yard Monday to Sunday between 8:00 AM
                 and 10:00 PM for instant weighing and cash settlement.
               </p>
-              <a
-                href={`tel:${SITE_CONFIG.contact.phoneRaw}`}
-                className="text-brand-blue font-bold hover:underline block"
-              >
-                Call: {SITE_CONFIG.contact.phone}
-              </a>
+              <div className="space-y-1">
+                <a
+                  href={`tel:${SITE_CONFIG.contact.phoneRaw}`}
+                  className="text-brand-blue font-bold hover:underline block"
+                >
+                  Call: {SITE_CONFIG.contact.phone}
+                </a>
+                <a
+                  href={`tel:${SITE_CONFIG.contact.phoneSecondaryRaw}`}
+                  className="text-brand-blue font-bold hover:underline block text-xs"
+                >
+                  Alt: {SITE_CONFIG.contact.phoneSecondary}
+                </a>
+              </div>
             </div>
           </aside>
 

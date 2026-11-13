@@ -3,14 +3,14 @@ import { ScrapCategory, ScrapItem } from "@/lib/types/database";
 
 // Fallback seed catalog for offline / local preview before Supabase keys are entered
 export const FALLBACK_CATEGORIES: ScrapCategory[] = [
-  { id: "cat-1", name: "Iron & Steel", slug: "iron-steel", icon: "Hammer", sort_order: 1, is_active: true, created_at: "", updated_at: "" },
-  { id: "cat-2", name: "Copper", slug: "copper", icon: "Zap", sort_order: 2, is_active: true, created_at: "", updated_at: "" },
+  { id: "cat-1", name: "Iron & Steel", slug: "iron-steel", icon: "Anvil", sort_order: 1, is_active: true, created_at: "", updated_at: "" },
+  { id: "cat-2", name: "Copper", slug: "copper", icon: "Cable", sort_order: 2, is_active: true, created_at: "", updated_at: "" },
   { id: "cat-3", name: "Brass", slug: "brass", icon: "Coins", sort_order: 3, is_active: true, created_at: "", updated_at: "" },
   { id: "cat-4", name: "Aluminium", slug: "aluminium", icon: "Layers", sort_order: 4, is_active: true, created_at: "", updated_at: "" },
   { id: "cat-5", name: "Stainless Steel", slug: "stainless-steel", icon: "Shield", sort_order: 5, is_active: true, created_at: "", updated_at: "" },
-  { id: "cat-6", name: "Plastic", slug: "plastic", icon: "Package", sort_order: 6, is_active: true, created_at: "", updated_at: "" },
-  { id: "cat-7", name: "Paper & Cardboard", slug: "paper-cardboard", icon: "FileText", sort_order: 7, is_active: true, created_at: "", updated_at: "" },
-  { id: "cat-8", name: "E-Waste", slug: "ewaste", icon: "Cpu", sort_order: 8, is_active: true, created_at: "", updated_at: "" },
+  { id: "cat-6", name: "Plastic", slug: "plastic", icon: "Recycle", sort_order: 6, is_active: true, created_at: "", updated_at: "" },
+  { id: "cat-7", name: "Paper & Cardboard", slug: "paper-cardboard", icon: "Newspaper", sort_order: 7, is_active: true, created_at: "", updated_at: "" },
+  { id: "cat-8", name: "E-Waste", slug: "ewaste", icon: "CircuitBoard", sort_order: 8, is_active: true, created_at: "", updated_at: "" },
   { id: "cat-9", name: "Batteries", slug: "batteries", icon: "BatteryCharging", sort_order: 9, is_active: true, created_at: "", updated_at: "" },
   { id: "cat-10", name: "Appliances", slug: "appliances", icon: "Tv", sort_order: 10, is_active: true, created_at: "", updated_at: "" },
 ];

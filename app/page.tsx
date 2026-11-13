@@ -22,6 +22,15 @@ import {
   HelpCircle,
   FileCheck,
   Phone,
+  Anvil,
+  Cable,
+  Coins,
+  Layers,
+  Shield,
+  Newspaper,
+  CircuitBoard,
+  BatteryCharging,
+  Tv,
 } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/site-config";
 import { getScrapItems } from "@/lib/services/rates";
@@ -29,6 +38,19 @@ import { formatCurrency } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+
+const categoryIcons: Record<string, React.ComponentType<{ className?: string }>> = {
+  "iron-steel": Anvil,
+  copper: Cable,
+  brass: Coins,
+  aluminium: Layers,
+  "stainless-steel": Shield,
+  plastic: Recycle,
+  "paper-cardboard": Newspaper,
+  ewaste: CircuitBoard,
+  batteries: BatteryCharging,
+  appliances: Tv,
+};
 
 export const revalidate = 60; // Refresh live rates every minute
 
@@ -355,14 +377,14 @@ export default async function HomePage() {
                 className="hover:border-brand-blue transition-all duration-200 hover:shadow-card flex flex-col justify-between p-3.5 sm:p-6 rounded-xl sm:rounded-2xl"
               >
                 <div>
-                  <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-lg sm:rounded-xl bg-brand-blue-light text-brand-blue flex items-center justify-center mb-2.5 sm:mb-4">
-                    {svc.id === "waste-collection" && <Trash2 className="h-4 w-4 sm:h-5 sm:w-5" />}
-                    {svc.id === "scrap-trading" && <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5" />}
-                    {svc.id === "recycling" && <Recycle className="h-4 w-4 sm:h-5 sm:w-5" />}
-                    {svc.id === "doorstep-pickup" && <Scale className="h-4 w-4 sm:h-5 sm:w-5" />}
-                    {svc.id === "ewaste-and-electronics" && <Cpu className="h-4 w-4 sm:h-5 sm:w-5" />}
-                    {svc.id === "bulk-commercial-scrap" && <Building2 className="h-4 w-4 sm:h-5 sm:w-5" />}
-                    {svc.id === "demolition-dismantling" && <HardHat className="h-4 w-4 sm:h-5 sm:w-5" />}
+                  <div className="h-9 w-9 rounded-lg bg-brand-blue-light text-brand-blue flex items-center justify-center mb-2.5 sm:mb-4">
+                    {svc.id === "waste-collection" && <Trash2 className="h-4 w-4" />}
+                    {svc.id === "scrap-trading" && <TrendingUp className="h-4 w-4" />}
+                    {svc.id === "recycling" && <Recycle className="h-4 w-4" />}
+                    {svc.id === "doorstep-pickup" && <Scale className="h-4 w-4" />}
+                    {svc.id === "ewaste-and-electronics" && <Cpu className="h-4 w-4" />}
+                    {svc.id === "bulk-commercial-scrap" && <Building2 className="h-4 w-4" />}
+                    {svc.id === "demolition-dismantling" && <HardHat className="h-4 w-4" />}
                   </div>
                   <h3 className="text-xs sm:text-lg font-bold text-brand-dark leading-snug">
                     {svc.title}
@@ -409,20 +431,23 @@ export default async function HomePage() {
           </div>
 
           <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3.5">
-            {SITE_CONFIG.acceptedCategories.map((cat) => (
-              <Link
-                key={cat.id}
-                href={`/what-we-accept#${cat.id}`}
-                className="group p-2.5 sm:p-4 rounded-xl border border-brand-border bg-brand-bg/40 hover:bg-brand-surface hover:border-brand-blue hover:shadow-card transition-all duration-150 text-center flex flex-col items-center justify-center gap-1.5"
-              >
-                <div className="h-8 w-8 sm:h-11 sm:w-11 rounded-lg sm:rounded-xl bg-brand-blue-light group-hover:bg-brand-blue group-hover:text-white text-brand-blue transition-colors flex items-center justify-center">
-                  <Hammer className="h-4 w-4 sm:h-5 sm:w-5" />
-                </div>
-                <h3 className="font-bold text-[11px] sm:text-xs text-brand-dark group-hover:text-brand-blue transition-colors leading-tight line-clamp-1">
-                  {cat.name}
-                </h3>
-              </Link>
-            ))}
+            {SITE_CONFIG.acceptedCategories.map((cat) => {
+              const IconComponent = categoryIcons[cat.id] || Anvil;
+              return (
+                <Link
+                  key={cat.id}
+                  href={`/what-we-accept#${cat.id}`}
+                  className="group p-2.5 sm:p-4 rounded-xl border border-brand-border bg-brand-bg/40 hover:bg-brand-surface hover:border-brand-blue hover:shadow-card transition-all duration-150 text-center flex flex-col items-center justify-center gap-1.5"
+                >
+                  <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-lg bg-brand-blue-light group-hover:bg-brand-blue group-hover:text-white text-brand-blue transition-colors flex items-center justify-center">
+                    <IconComponent className="h-4 w-4" />
+                  </div>
+                  <h3 className="font-bold text-[11px] sm:text-xs text-brand-dark group-hover:text-brand-blue transition-colors leading-tight line-clamp-1">
+                    {cat.name}
+                  </h3>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>

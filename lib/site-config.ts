@@ -36,6 +36,8 @@ export const SITE_CONFIG = {
   contact: {
     phone: "+91 77389 88646",
     phoneRaw: "+917738988646",
+    phoneSecondary: "+91 98212 09541",
+    phoneSecondaryRaw: "+919821209541",
     whatsapp: "+91 77389 88646",
     whatsappRaw: "917738988646",
     email: "info@reflectionscrap.com",
@@ -190,13 +192,13 @@ export const SITE_CONFIG = {
       id: "iron-steel",
       name: "Iron & Steel",
       description: "Cast iron, mild steel rods, pipes, beams, tin cans, fabrication scrap, structural angles.",
-      icon: "Hammer",
+      icon: "Anvil",
     },
     {
       id: "copper",
       name: "Copper",
       description: "Copper wiring, armature, heavy copper pipes, copper utensils, motor winding scrap.",
-      icon: "Zap",
+      icon: "Cable",
     },
     {
       id: "brass",
@@ -220,19 +222,19 @@ export const SITE_CONFIG = {
       id: "plastic",
       name: "Plastic",
       description: "Rigid plastic, HDPE bottles, plastic crates, buckets, pipes, PET bottles, drums.",
-      icon: "Package",
+      icon: "Recycle",
     },
     {
       id: "paper-cardboard",
       name: "Paper & Cardboard",
       description: "Old corrugated cartons (boxes), newspapers (raddi), office records, shredded documents, magazines.",
-      icon: "FileText",
+      icon: "Newspaper",
     },
     {
       id: "ewaste",
       name: "E-Waste",
       description: "Desktop CPUs, laptops, computer monitors, motherboards, servers, telecom gear, wires.",
-      icon: "Cpu",
+      icon: "CircuitBoard",
     },
     {
       id: "batteries",

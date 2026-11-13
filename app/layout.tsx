@@ -109,7 +109,7 @@ export default async function RootLayout({
     logo: `${SITE_CONFIG.url}/logo.png`,
     description: SITE_CONFIG.description,
     url: SITE_CONFIG.url,
-    telephone: SITE_CONFIG.contact.phone,
+    telephone: [SITE_CONFIG.contact.phone, SITE_CONFIG.contact.phoneSecondary],
     email: SITE_CONFIG.contact.email,
     address: {
       "@type": "PostalAddress",

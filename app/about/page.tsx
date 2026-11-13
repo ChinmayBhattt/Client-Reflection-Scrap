@@ -138,12 +138,20 @@ export default function AboutPage() {
                   <Phone className="h-5 w-5 text-brand-blue shrink-0 mt-0.5" />
                   <div>
                     <span className="block font-bold text-brand-dark">Phone Contact</span>
-                    <a
-                      href={`tel:${SITE_CONFIG.contact.phoneRaw}`}
-                      className="text-brand-blue hover:underline"
-                    >
-                      {SITE_CONFIG.contact.phone}
-                    </a>
+                    <div className="flex flex-col gap-0.5">
+                      <a
+                        href={`tel:${SITE_CONFIG.contact.phoneRaw}`}
+                        className="text-brand-blue hover:underline"
+                      >
+                        {SITE_CONFIG.contact.phone}
+                      </a>
+                      <a
+                        href={`tel:${SITE_CONFIG.contact.phoneSecondaryRaw}`}
+                        className="text-brand-blue hover:underline text-xs text-brand-muted"
+                      >
+                        {SITE_CONFIG.contact.phoneSecondary}
+                      </a>
+                    </div>
                   </div>
                 </div>
 

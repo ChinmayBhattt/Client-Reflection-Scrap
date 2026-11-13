@@ -191,14 +191,22 @@ export function Footer() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-2.5">
-                <Phone className="h-4 w-4 text-brand-blue shrink-0" />
-                <a
-                  href={`tel:${SITE_CONFIG.contact.phoneRaw}`}
-                  className="hover:text-brand-blue transition-colors"
-                >
-                  {SITE_CONFIG.contact.phone}
-                </a>
+              <div className="flex items-start gap-2.5">
+                <Phone className="h-4 w-4 text-brand-blue shrink-0 mt-0.5" />
+                <div className="flex flex-col gap-0.5">
+                  <a
+                    href={`tel:${SITE_CONFIG.contact.phoneRaw}`}
+                    className="hover:text-brand-blue transition-colors"
+                  >
+                    {SITE_CONFIG.contact.phone}
+                  </a>
+                  <a
+                    href={`tel:${SITE_CONFIG.contact.phoneSecondaryRaw}`}
+                    className="hover:text-brand-blue transition-colors text-xs text-gray-400"
+                  >
+                    {SITE_CONFIG.contact.phoneSecondary}
+                  </a>
+                </div>
               </div>
 
               <div className="flex items-center gap-2.5">

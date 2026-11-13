@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
-  Hammer,
-  Zap,
+  Anvil,
+  Cable,
   Coins,
   Layers,
   Shield,
-  Package,
-  FileText,
-  Cpu,
+  Recycle,
+  Newspaper,
+  CircuitBoard,
   BatteryCharging,
   Tv,
   AlertTriangle,
@@ -29,16 +29,16 @@ export const metadata: Metadata = {
 
 export default function WhatWeAcceptPage() {
   const categoryIcons: Record<string, React.ReactNode> = {
-    "iron-steel": <Hammer className="h-5 w-5 text-brand-blue" />,
-    copper: <Zap className="h-5 w-5 text-amber-500" />,
-    brass: <Coins className="h-5 w-5 text-yellow-600" />,
-    aluminium: <Layers className="h-5 w-5 text-slate-500 dark:text-slate-300" />,
-    "stainless-steel": <Shield className="h-5 w-5 text-sky-600 dark:text-sky-400" />,
-    plastic: <Package className="h-5 w-5 text-indigo-500 dark:text-indigo-400" />,
-    "paper-cardboard": <FileText className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />,
-    ewaste: <Cpu className="h-5 w-5 text-cyan-600 dark:text-cyan-400" />,
-    batteries: <BatteryCharging className="h-5 w-5 text-rose-500" />,
-    appliances: <Tv className="h-5 w-5 text-violet-600 dark:text-violet-400" />,
+    "iron-steel": <Anvil className="h-4 w-4 text-brand-blue" />,
+    copper: <Cable className="h-4 w-4 text-amber-500" />,
+    brass: <Coins className="h-4 w-4 text-yellow-600" />,
+    aluminium: <Layers className="h-4 w-4 text-slate-500 dark:text-slate-300" />,
+    "stainless-steel": <Shield className="h-4 w-4 text-sky-600 dark:text-sky-400" />,
+    plastic: <Recycle className="h-4 w-4 text-indigo-500 dark:text-indigo-400" />,
+    "paper-cardboard": <Newspaper className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />,
+    ewaste: <CircuitBoard className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />,
+    batteries: <BatteryCharging className="h-4 w-4 text-rose-500" />,
+    appliances: <Tv className="h-4 w-4 text-violet-600 dark:text-violet-400" />,
   };
 
   const nonAccepted = [
@@ -75,7 +75,7 @@ export default function WhatWeAcceptPage() {
             >
               <CardHeader className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <div className="h-10 w-10 rounded-xl bg-muted/70 border border-brand-border flex items-center justify-center">
+                  <div className="h-9 w-9 rounded-lg bg-muted/70 border border-brand-border flex items-center justify-center">
                     {categoryIcons[cat.id]}
                   </div>
                   <Badge variant="success" className="text-[11px]">
