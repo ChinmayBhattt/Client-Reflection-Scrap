@@ -106,7 +106,7 @@ export default function ContactPage() {
                     <span className="block font-bold text-brand-dark">
                       Click to Call
                     </span>
-                    <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
                       <a
                         href={`tel:${SITE_CONFIG.contact.phoneRaw}`}
                         className="text-brand-blue font-bold hover:underline"
@@ -119,6 +119,13 @@ export default function ContactPage() {
                         className="text-brand-blue font-bold hover:underline"
                       >
                         {SITE_CONFIG.contact.phoneSecondary}
+                      </a>
+                      <span className="text-brand-muted">•</span>
+                      <a
+                        href={`tel:${SITE_CONFIG.contact.phoneTertiaryRaw}`}
+                        className="text-brand-blue font-bold hover:underline"
+                      >
+                        {SITE_CONFIG.contact.phoneTertiary}
                       </a>
                     </div>
                   </div>

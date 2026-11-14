@@ -151,6 +151,12 @@ export default function AboutPage() {
                       >
                         {SITE_CONFIG.contact.phoneSecondary}
                       </a>
+                      <a
+                        href={`tel:${SITE_CONFIG.contact.phoneTertiaryRaw}`}
+                        className="text-brand-blue hover:underline text-xs text-brand-muted"
+                      >
+                        {SITE_CONFIG.contact.phoneTertiary}
+                      </a>
                     </div>
                   </div>
                 </div>

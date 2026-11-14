@@ -85,10 +85,35 @@ export const FALLBACK_BLOG_POSTS: BlogPost[] = [
   },
 ];
 
+// Persistent local cache for newly authored / edited posts across dev turns
+const customPostsStore = new Map<string, BlogPost>();
+const deletedPostIds = new Set<string>();
+
+export function saveLocalPost(post: BlogPost) {
+  customPostsStore.set(post.id, post);
+  if (post.slug) {
+    customPostsStore.set(post.slug, post);
+  }
+}
+
+export function deleteLocalPost(idOrSlug: string) {
+  deletedPostIds.add(idOrSlug);
+  customPostsStore.delete(idOrSlug);
+}
+
 export async function getPublishedBlogPosts(): Promise<BlogPost[]> {
+  const localList = Array.from(new Set(Array.from(customPostsStore.values()))).filter(
+    (p) => p.is_published && !deletedPostIds.has(p.id) && !deletedPostIds.has(p.slug)
+  );
+
   try {
     const supabase = await createClient();
-    if (!supabase) return FALLBACK_BLOG_POSTS;
+    if (!supabase) {
+      const activeFallback = FALLBACK_BLOG_POSTS.filter(
+        (p) => !deletedPostIds.has(p.id) && !deletedPostIds.has(p.slug)
+      );
+      return [...localList, ...activeFallback];
+    }
 
     const { data, error } = await supabase
       .from("blog_posts")
@@ -97,16 +122,34 @@ export async function getPublishedBlogPosts(): Promise<BlogPost[]> {
       .order("published_at", { ascending: false });
 
     if (error || !data || data.length === 0) {
-      return FALLBACK_BLOG_POSTS;
+      const activeFallback = FALLBACK_BLOG_POSTS.filter(
+        (p) => !deletedPostIds.has(p.id) && !deletedPostIds.has(p.slug)
+      );
+      return [...localList, ...activeFallback];
     }
 
-    return data as BlogPost[];
+    const dbPosts = data as BlogPost[];
+    const dbSlugs = new Set(dbPosts.map((p) => p.slug));
+    const uniqueLocal = localList.filter((p) => !dbSlugs.has(p.slug));
+
+    return [...uniqueLocal, ...dbPosts];
   } catch {
-    return FALLBACK_BLOG_POSTS;
+    const activeFallback = FALLBACK_BLOG_POSTS.filter(
+      (p) => !deletedPostIds.has(p.id) && !deletedPostIds.has(p.slug)
+    );
+    return [...localList, ...activeFallback];
   }
 }
 
 export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
+  if (deletedPostIds.has(slug)) return null;
+
+  // Check local store first
+  if (customPostsStore.has(slug)) {
+    const post = customPostsStore.get(slug);
+    if (post && post.is_published) return post;
+  }
+
   try {
     const supabase = await createClient();
     if (supabase) {
@@ -125,25 +168,48 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
     // Fall back to seed data
   }
 
-  return FALLBACK_BLOG_POSTS.find((post) => post.slug === slug) ?? null;
+  const fallback = FALLBACK_BLOG_POSTS.find((post) => post.slug === slug);
+  if (fallback && !deletedPostIds.has(fallback.id)) {
+    return fallback;
+  }
+  return null;
 }
 
 export async function getAllBlogPostsAdmin(): Promise<BlogPost[]> {
+  const localList = Array.from(new Set(Array.from(customPostsStore.values()))).filter(
+    (p) => !deletedPostIds.has(p.id) && !deletedPostIds.has(p.slug)
+  );
+
   try {
     const supabase = await createClient();
-    if (!supabase) return FALLBACK_BLOG_POSTS;
+    if (!supabase) {
+      const activeFallback = FALLBACK_BLOG_POSTS.filter(
+        (p) => !deletedPostIds.has(p.id) && !deletedPostIds.has(p.slug)
+      );
+      return [...localList, ...activeFallback];
+    }
 
     const { data, error } = await supabase
       .from("blog_posts")
       .select("*")
       .order("created_at", { ascending: false });
 
-    if (error || !data) {
-      return FALLBACK_BLOG_POSTS;
+    if (error || !data || data.length === 0) {
+      const activeFallback = FALLBACK_BLOG_POSTS.filter(
+        (p) => !deletedPostIds.has(p.id) && !deletedPostIds.has(p.slug)
+      );
+      return [...localList, ...activeFallback];
     }
 
-    return data.length > 0 ? (data as BlogPost[]) : FALLBACK_BLOG_POSTS;
+    const dbPosts = data as BlogPost[];
+    const dbSlugs = new Set(dbPosts.map((p) => p.slug));
+    const uniqueLocal = localList.filter((p) => !dbSlugs.has(p.slug));
+
+    return [...uniqueLocal, ...dbPosts];
   } catch {
-    return FALLBACK_BLOG_POSTS;
+    const activeFallback = FALLBACK_BLOG_POSTS.filter(
+      (p) => !deletedPostIds.has(p.id) && !deletedPostIds.has(p.slug)
+    );
+    return [...localList, ...activeFallback];
   }
 }

@@ -36,8 +36,10 @@ export const SITE_CONFIG = {
   contact: {
     phone: "+91 77389 88646",
     phoneRaw: "+917738988646",
-    phoneSecondary: "+91 98212 09541",
-    phoneSecondaryRaw: "+919821209541",
+    phoneSecondary: "+91 96197 38841",
+    phoneSecondaryRaw: "+919619738841",
+    phoneTertiary: "+91 98212 09541",
+    phoneTertiaryRaw: "+919821209541",
     whatsapp: "+91 77389 88646",
     whatsappRaw: "917738988646",
     email: "info@reflectionscrap.com",

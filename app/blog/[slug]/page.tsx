@@ -3,10 +3,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Calendar, Clock, User, Tag, CalendarCheck } from "lucide-react";
 import { getBlogPostBySlug } from "@/lib/services/blog";
+import { getCurrentUser } from "@/lib/services/user";
 import { formatDate } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BlogEngagement } from "@/components/blog-engagement";
+import { BlogAuthorToolbar } from "./blog-author-toolbar";
 
 export const revalidate = 60;
 
@@ -75,15 +77,21 @@ export default async function BlogDetailPage({
 }: {
   params: { slug: string };
 }) {
-  const post = await getBlogPostBySlug(params.slug);
+  const [post, user] = await Promise.all([
+    getBlogPostBySlug(params.slug),
+    getCurrentUser(),
+  ]);
+
   if (!post) {
     notFound();
   }
 
+  const canEdit = Boolean(user?.canWriteBlog || user?.role === "admin");
+
   return (
     <div className="py-10 md:py-16 bg-brand-bg">
-      <article className="container max-w-4xl space-y-8">
-        <div>
+      <article className="container max-w-4xl space-y-6">
+        <div className="flex items-center justify-between">
           <Button asChild variant="ghost" size="sm" className="gap-1.5 -ml-2">
             <Link href="/blog">
               <ArrowLeft className="h-4 w-4" />
@@ -91,6 +99,8 @@ export default async function BlogDetailPage({
             </Link>
           </Button>
         </div>
+
+        {canEdit && <BlogAuthorToolbar post={post} userEmail={user?.email} />}
 
         <div className="rounded-3xl border border-brand-border bg-brand-surface overflow-hidden shadow-card">
           {post.cover_image_url && (

@@ -206,6 +206,12 @@ export function Footer() {
                   >
                     {SITE_CONFIG.contact.phoneSecondary}
                   </a>
+                  <a
+                    href={`tel:${SITE_CONFIG.contact.phoneTertiaryRaw}`}
+                    className="hover:text-brand-blue transition-colors text-xs text-gray-400"
+                  >
+                    {SITE_CONFIG.contact.phoneTertiary}
+                  </a>
                 </div>
               </div>
 

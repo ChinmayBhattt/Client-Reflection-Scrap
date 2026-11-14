@@ -2,6 +2,8 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import {
   Search,
   Clock,
@@ -10,6 +12,9 @@ import {
   Plus,
   Newspaper,
   Tag,
+  Edit2,
+  Trash2,
+  Sparkles,
 } from "lucide-react";
 import type { BlogPost } from "@/lib/types/database";
 import { BLOG_CATEGORIES } from "@/lib/content-constants";
@@ -19,24 +24,47 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { BlogEngagement } from "@/components/blog-engagement";
+import { BlogEditorModal } from "@/components/blog/blog-editor-modal";
+import { deleteBlogPost } from "@/app/admin/blog/actions";
 
 interface BlogListClientProps {
   posts: BlogPost[];
+  canWriteBlog?: boolean;
+  userEmail?: string;
+  authorName?: string;
   isAdmin?: boolean;
 }
 
-export function BlogListClient({ posts, isAdmin = false }: BlogListClientProps) {
+export function BlogListClient({
+  posts,
+  canWriteBlog = false,
+  userEmail,
+  authorName,
+  isAdmin = false,
+}: BlogListClientProps) {
+  const router = useRouter();
   const [search, setSearch] = React.useState("");
   const [selectedCategory, setSelectedCategory] = React.useState("all");
 
-  const categories = React.useMemo(() => {
-    const fromPosts = posts.map((p) => p.category);
-    return Array.from(new Set([...BLOG_CATEGORIES, ...fromPosts]));
+  // Modal editor state
+  const [editorModalOpen, setEditorModalOpen] = React.useState(false);
+  const [editingPost, setEditingPost] = React.useState<BlogPost | null>(null);
+
+  // Local live posts state to reflect additions/edits instantly
+  const [livePosts, setLivePosts] = React.useState<BlogPost[]>(posts);
+
+  React.useEffect(() => {
+    setLivePosts(posts);
   }, [posts]);
+
+  const categories = React.useMemo(() => {
+    const fromPosts = livePosts.map((p) => p.category);
+    return Array.from(new Set([...BLOG_CATEGORIES, ...fromPosts]));
+  }, [livePosts]);
 
   const filteredPosts = React.useMemo(() => {
     const q = search.trim().toLowerCase();
-    return posts.filter((post) => {
+    return livePosts.filter((post) => {
       const matchesCat =
         selectedCategory === "all" || post.category === selectedCategory;
       const matchesSearch =
@@ -46,10 +74,77 @@ export function BlogListClient({ posts, isAdmin = false }: BlogListClientProps) 
         post.tags.some((t) => t.toLowerCase().includes(q));
       return matchesCat && matchesSearch;
     });
-  }, [posts, search, selectedCategory]);
+  }, [livePosts, search, selectedCategory]);
+
+  const hasAuthorAccess = canWriteBlog || isAdmin;
+
+  const handleOpenWrite = () => {
+    setEditingPost(null);
+    setEditorModalOpen(true);
+  };
+
+  const handleOpenEdit = (post: BlogPost) => {
+    setEditingPost(post);
+    setEditorModalOpen(true);
+  };
+
+  const handleDelete = async (postId: string) => {
+    if (!window.confirm("Are you sure you want to delete this blog post?")) {
+      return;
+    }
+
+    try {
+      const res = await deleteBlogPost(postId);
+      if (res.success) {
+        toast.success(res.message || "Blog post deleted");
+        setLivePosts((prev) => prev.filter((p) => p.id !== postId));
+        router.refresh();
+      } else {
+        toast.error(res.error || "Failed to delete blog post");
+      }
+    } catch {
+      toast.error("Error deleting post");
+    }
+  };
 
   return (
     <div className="space-y-8">
+      {/* Author Access Banner (Shown only to authorized email owners) */}
+      {hasAuthorAccess && (
+        <div className="p-3.5 sm:p-4 rounded-2xl bg-brand-green-light/40 border border-brand-green/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 animate-in fade-in-50 duration-200">
+          <div className="flex items-center gap-2.5">
+            <div className="h-8 w-8 rounded-xl bg-brand-green text-white flex items-center justify-center shrink-0">
+              <Sparkles className="h-4 w-4" />
+            </div>
+            <div>
+              <p className="text-xs sm:text-sm font-bold text-brand-dark">
+                Blog Author Ownership Active
+              </p>
+              <p className="text-[11px] text-brand-muted">
+                Authorized as: <strong className="text-brand-dark">{userEmail || "Owner"}</strong> • You can write, edit, and publish blogs directly.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 self-end sm:self-auto">
+            <Button
+              type="button"
+              size="sm"
+              onClick={handleOpenWrite}
+              className="bg-brand-green hover:bg-brand-green/90 text-white font-bold text-xs h-8 px-4 gap-1.5 shadow-sm rounded-xl cursor-pointer"
+            >
+              <Plus className="h-3.5 w-3.5" />
+              <span>Write Blog</span>
+            </Button>
+            <Button asChild size="sm" variant="outline" className="text-xs h-8 px-3 rounded-xl">
+              <Link href="/admin/blog">
+                <span>Manager</span>
+              </Link>
+            </Button>
+          </div>
+        </div>
+      )}
+
       {/* Controls Bar */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-brand-surface p-4 sm:p-5 rounded-2xl border border-brand-border shadow-subtle">
         <div className="relative flex-1 max-w-md">
@@ -71,7 +166,7 @@ export function BlogListClient({ posts, isAdmin = false }: BlogListClientProps) 
             onClick={() => setSelectedCategory("all")}
             className="rounded-full text-xs h-8 px-3"
           >
-            All ({posts.length})
+            All ({livePosts.length})
           </Button>
           {categories.map((cat) => (
             <Button
@@ -85,12 +180,17 @@ export function BlogListClient({ posts, isAdmin = false }: BlogListClientProps) 
               {cat}
             </Button>
           ))}
-          {isAdmin && (
-            <Button asChild size="sm" variant="secondary" className="rounded-full text-xs h-8 px-3.5 gap-1">
-              <Link href="/admin/blog">
-                <Plus className="h-3.5 w-3.5" />
-                <span>Add / Manage Blogs</span>
-              </Link>
+
+          {/* Primary "+ Write Blog" button for authorized authors */}
+          {hasAuthorAccess && (
+            <Button
+              type="button"
+              size="sm"
+              onClick={handleOpenWrite}
+              className="rounded-full text-xs h-8 px-4 font-bold bg-brand-green hover:bg-brand-green/90 text-white gap-1.5 shadow-sm ml-auto sm:ml-0 cursor-pointer"
+            >
+              <Plus className="h-3.5 w-3.5" />
+              <span>Write Blog</span>
             </Button>
           )}
         </div>
@@ -102,15 +202,15 @@ export function BlogListClient({ posts, isAdmin = false }: BlogListClientProps) 
           {filteredPosts.map((post) => (
             <Card
               key={post.id}
-              className="border border-brand-border bg-brand-surface shadow-subtle hover:border-brand-blue hover:shadow-card transition-all duration-200 overflow-hidden flex flex-col justify-between"
+              className="border border-brand-border bg-brand-surface shadow-subtle hover:border-brand-blue hover:shadow-card transition-all duration-200 overflow-hidden flex flex-col justify-between group"
             >
               <div>
                 {post.cover_image_url && (
-                  <Link href={`/blog/${post.slug}`} className="block overflow-hidden bg-muted aspect-[16/9]">
+                  <Link href={`/blog/${post.slug}`} className="block overflow-hidden bg-muted aspect-[16/9] relative">
                     <img
                       src={post.cover_image_url}
                       alt={post.title}
-                      className="h-full w-full object-cover transition-transform duration-300 hover:scale-[1.03]"
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                     />
                   </Link>
                 )}
@@ -158,17 +258,43 @@ export function BlogListClient({ posts, isAdmin = false }: BlogListClientProps) 
                   </div>
                 )}
 
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between pt-1 border-t border-brand-border/60">
                   <span className="text-xs text-brand-muted font-medium">
                     By {post.author_name}
                   </span>
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    className="inline-flex items-center gap-1 text-xs font-bold text-brand-blue hover:underline"
-                  >
-                    <span>Read Full Article</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
+
+                  <div className="flex items-center gap-2">
+                    {/* Authorized Edit & Delete buttons */}
+                    {hasAuthorAccess && (
+                      <div className="flex items-center gap-1 mr-2">
+                        <button
+                          type="button"
+                          onClick={() => handleOpenEdit(post)}
+                          className="h-7 px-2.5 rounded-lg border border-brand-border bg-brand-surface hover:bg-brand-blue-light text-brand-dark hover:text-brand-blue transition-colors text-xs font-bold inline-flex items-center gap-1 cursor-pointer"
+                          title="Edit this blog post"
+                        >
+                          <Edit2 className="h-3 w-3 text-brand-blue" />
+                          <span>Edit</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleDelete(post.id)}
+                          className="h-7 w-7 rounded-lg border border-brand-border bg-brand-surface hover:bg-red-50 text-red-500 hover:text-red-600 transition-colors inline-flex items-center justify-center cursor-pointer"
+                          title="Delete this blog post"
+                        >
+                          <Trash2 className="h-3.5 w-3.5" />
+                        </button>
+                      </div>
+                    )}
+
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="inline-flex items-center gap-1 text-xs font-bold text-brand-blue hover:underline"
+                    >
+                      <span>Read Article</span>
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                  </div>
                 </div>
 
                 <BlogEngagement
@@ -204,6 +330,17 @@ export function BlogListClient({ posts, isAdmin = false }: BlogListClientProps) 
           </Button>
         </div>
       )}
+
+      {/* Blog Editor Modal */}
+      <BlogEditorModal
+        isOpen={editorModalOpen}
+        onClose={() => setEditorModalOpen(false)}
+        post={editingPost}
+        defaultAuthorName={authorName || "Reflection Scrap Editorial"}
+        onSaved={() => {
+          router.refresh();
+        }}
+      />
     </div>
   );
 }

@@ -112,7 +112,13 @@ export default async function DashboardLayout({
                   href={`tel:${SITE_CONFIG.contact.phoneSecondaryRaw}`}
                   className="text-brand-blue font-bold hover:underline block text-xs"
                 >
-                  Alt: {SITE_CONFIG.contact.phoneSecondary}
+                  Direct: {SITE_CONFIG.contact.phoneSecondary}
+                </a>
+                <a
+                  href={`tel:${SITE_CONFIG.contact.phoneTertiaryRaw}`}
+                  className="text-brand-blue font-bold hover:underline block text-xs"
+                >
+                  Alt: {SITE_CONFIG.contact.phoneTertiary}
                 </a>
               </div>
             </div>

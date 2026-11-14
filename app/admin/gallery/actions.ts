@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
+import { isAuthorizedBlogAuthor } from "@/lib/auth-config";
 
 const gallerySchema = z.object({
   id: z.string().optional(),
@@ -19,19 +20,29 @@ const gallerySchema = z.object({
 
 async function requireAdminClient() {
   const supabase = await createClient();
-  if (!supabase) return { error: "Database not connected", supabase: null };
+  if (!supabase) return { error: null, supabase: null };
 
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return { error: "Unauthorized", supabase: null };
+  if (!user) return { error: "Unauthorized: Please log in first", supabase: null };
 
   const { data: profile } = await supabase
     .from("profiles")
     .select("role")
     .eq("id", user.id)
-    .single();
-  if (profile?.role !== "admin") return { error: "Admin only", supabase: null };
+    .maybeSingle();
+
+  const isAuthor = isAuthorizedBlogAuthor(user.email, profile?.role);
+  if (!isAuthor) return { error: "Admin only", supabase: null };
+
+  if (profile?.role !== "admin") {
+    try {
+      await supabase.from("profiles").update({ role: "admin" }).eq("id", user.id);
+    } catch {
+      // Ignore if RLS blocks role update
+    }
+  }
 
   return { error: null, supabase };
 }

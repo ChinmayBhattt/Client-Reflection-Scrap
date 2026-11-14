@@ -21,7 +21,7 @@ export default async function BlogPage() {
     getCurrentUser(),
   ]);
 
-  const isAdmin = user?.role === "admin";
+  const canWriteBlog = Boolean(user?.canWriteBlog || user?.role === "admin");
 
   return (
     <div className="py-12 md:py-20 bg-brand-bg">
@@ -42,7 +42,12 @@ export default async function BlogPage() {
         </div>
 
         {/* Interactive Blog Grid */}
-        <BlogListClient posts={posts} isAdmin={isAdmin} />
+        <BlogListClient
+          posts={posts}
+          canWriteBlog={canWriteBlog}
+          userEmail={user?.email}
+          authorName={user?.full_name}
+        />
 
         {/* Bottom CTA */}
         <div className="rounded-3xl bg-brand-surface border border-brand-border p-6 sm:p-10 shadow-subtle flex flex-col md:flex-row items-center justify-between gap-6">

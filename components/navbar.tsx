@@ -420,7 +420,7 @@ export function Navbar({ user: initialUser }: NavbarProps) {
           <a
             href={`tel:${SITE_CONFIG.contact.phoneRaw}`}
             className="h-9 px-2.5 rounded-lg border border-brand-border bg-brand-bg/60 text-brand-dark hover:border-brand-blue hover:bg-brand-blue-light transition-colors text-xs font-bold inline-flex items-center gap-1.5"
-            title={`Quick Call: ${SITE_CONFIG.contact.phone}`}
+            title={`Quick Call: ${SITE_CONFIG.contact.phone} / ${SITE_CONFIG.contact.phoneSecondary} / ${SITE_CONFIG.contact.phoneTertiary}`}
           >
             <div className="h-5 w-5 rounded-full bg-brand-blue-light text-brand-blue flex items-center justify-center shrink-0">
               <Phone className="h-3 w-3" />
