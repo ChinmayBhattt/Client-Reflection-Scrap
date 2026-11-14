@@ -9,15 +9,44 @@ import type { BlogPost } from "@/lib/types/database";
 import { Button } from "@/components/ui/button";
 import { BlogEditorModal } from "@/components/blog/blog-editor-modal";
 import { deleteBlogPost } from "@/app/admin/blog/actions";
+import { createClient } from "@/lib/supabase/client";
+import { isAuthorizedBlogAuthor } from "@/lib/auth-config";
 
 interface BlogAuthorToolbarProps {
   post: BlogPost;
   userEmail?: string;
+  initialCanEdit?: boolean;
 }
 
-export function BlogAuthorToolbar({ post, userEmail }: BlogAuthorToolbarProps) {
+export function BlogAuthorToolbar({
+  post,
+  userEmail,
+  initialCanEdit = false,
+}: BlogAuthorToolbarProps) {
   const router = useRouter();
   const [editorOpen, setEditorOpen] = React.useState(false);
+  const [canEdit, setCanEdit] = React.useState<boolean>(initialCanEdit);
+  const [activeEmail, setActiveEmail] = React.useState<string | undefined>(userEmail);
+
+  React.useEffect(() => {
+    if (initialCanEdit) {
+      setCanEdit(true);
+      return;
+    }
+    const supabase = createClient();
+    if (!supabase) return;
+
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (user?.email) {
+        setActiveEmail(user.email);
+        if (isAuthorizedBlogAuthor(user.email)) {
+          setCanEdit(true);
+        }
+      }
+    });
+  }, [initialCanEdit]);
+
+  if (!canEdit) return null;
 
   const handleDelete = async () => {
     if (!window.confirm("Are you sure you want to delete this article?")) return;
@@ -47,7 +76,7 @@ export function BlogAuthorToolbar({ post, userEmail }: BlogAuthorToolbarProps) {
               Author Controls Active
             </span>
             <span className="text-[11px] text-brand-muted block">
-              Signed in as {userEmail || "Owner"} • You have editing rights for this post.
+              Signed in as {activeEmail || userEmail || "Owner"} • You have editing rights for this post.
             </span>
           </div>
         </div>

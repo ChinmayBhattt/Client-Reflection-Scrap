@@ -26,6 +26,8 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { BlogEngagement } from "@/components/blog-engagement";
 import { BlogEditorModal } from "@/components/blog/blog-editor-modal";
 import { deleteBlogPost } from "@/app/admin/blog/actions";
+import { createClient } from "@/lib/supabase/client";
+import { isAuthorizedBlogAuthor } from "@/lib/auth-config";
 
 interface BlogListClientProps {
   posts: BlogPost[];
@@ -76,7 +78,30 @@ export function BlogListClient({
     });
   }, [livePosts, search, selectedCategory]);
 
-  const hasAuthorAccess = canWriteBlog || isAdmin;
+  const [clientAuthorAccess, setClientAuthorAccess] = React.useState<boolean>(
+    Boolean(canWriteBlog || isAdmin)
+  );
+  const [activeEmail, setActiveEmail] = React.useState<string | undefined>(userEmail);
+
+  React.useEffect(() => {
+    if (canWriteBlog || isAdmin) {
+      setClientAuthorAccess(true);
+      return;
+    }
+    const supabase = createClient();
+    if (!supabase) return;
+
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (user?.email) {
+        setActiveEmail(user.email);
+        if (isAuthorizedBlogAuthor(user.email)) {
+          setClientAuthorAccess(true);
+        }
+      }
+    });
+  }, [canWriteBlog, isAdmin]);
+
+  const hasAuthorAccess = Boolean(canWriteBlog || isAdmin || clientAuthorAccess);
 
   const handleOpenWrite = () => {
     setEditingPost(null);
@@ -121,7 +146,7 @@ export function BlogListClient({
                 Blog Author Ownership Active
               </p>
               <p className="text-[11px] text-brand-muted">
-                Authorized as: <strong className="text-brand-dark">{userEmail || "Owner"}</strong> • You can write, edit, and publish blogs directly.
+                Authorized as: <strong className="text-brand-dark">{activeEmail || userEmail || "Owner"}</strong> • You can write, edit, and publish blogs directly.
               </p>
             </div>
           </div>

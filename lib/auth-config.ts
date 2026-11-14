@@ -12,8 +12,7 @@
 export const AUTHORIZED_BLOG_EMAILS: string[] = [
   // Primary Authorized Owners & Authors
   "ayjazkhan68@gmail.com",
-
-  // Reflection Scrap official email & aliases
+  "chinmaybhatt26@gmail.com",
   "info@reflectionscrap.com",
 ];
 

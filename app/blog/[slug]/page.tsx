@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { BlogEngagement } from "@/components/blog-engagement";
 import { BlogAuthorToolbar } from "./blog-author-toolbar";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
@@ -100,7 +100,11 @@ export default async function BlogDetailPage({
           </Button>
         </div>
 
-        {canEdit && <BlogAuthorToolbar post={post} userEmail={user?.email} />}
+        <BlogAuthorToolbar
+          post={post}
+          userEmail={user?.email}
+          initialCanEdit={canEdit}
+        />
 
         <div className="rounded-3xl border border-brand-border bg-brand-surface overflow-hidden shadow-card">
           {post.cover_image_url && (
