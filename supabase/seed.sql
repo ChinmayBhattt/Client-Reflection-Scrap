@@ -25,12 +25,12 @@ INSERT INTO public.scrap_categories (id, name, slug, icon, sort_order, is_active
 VALUES
   ('11111111-1111-1111-1111-111111111101', 'Iron & Steel', 'iron-steel', 'Anvil', 1, true),
   ('11111111-1111-1111-1111-111111111102', 'Copper', 'copper', 'Cable', 2, true),
-  ('11111111-1111-1111-1111-111111111103', 'Brass', 'brass', 'Coins', 3, true),
-  ('11111111-1111-1111-1111-111111111104', 'Aluminium', 'aluminium', 'Layers', 4, true),
-  ('11111111-1111-1111-1111-111111111105', 'Stainless Steel', 'stainless-steel', 'Shield', 5, true),
-  ('11111111-1111-1111-1111-111111111106', 'Plastic', 'plastic', 'Recycle', 6, true),
-  ('11111111-1111-1111-1111-111111111107', 'Paper & Cardboard', 'paper-cardboard', 'Newspaper', 7, true),
-  ('11111111-1111-1111-1111-111111111108', 'E-Waste', 'ewaste', 'CircuitBoard', 8, true),
+  ('11111111-1111-1111-1111-111111111108', 'E-Waste', 'ewaste', 'CircuitBoard', 3, true),
+  ('11111111-1111-1111-1111-111111111103', 'Brass', 'brass', 'Coins', 4, true),
+  ('11111111-1111-1111-1111-111111111104', 'Aluminium', 'aluminium', 'Layers', 5, true),
+  ('11111111-1111-1111-1111-111111111105', 'Stainless Steel', 'stainless-steel', 'Shield', 6, true),
+  ('11111111-1111-1111-1111-111111111106', 'Plastic', 'plastic', 'Recycle', 7, true),
+  ('11111111-1111-1111-1111-111111111107', 'Paper & Cardboard', 'paper-cardboard', 'Newspaper', 8, true),
   ('11111111-1111-1111-1111-111111111109', 'Batteries', 'batteries', 'BatteryCharging', 9, true),
   ('11111111-1111-1111-1111-111111111110', 'Appliances', 'appliances', 'Tv', 10, true)
 ON CONFLICT (slug) DO UPDATE SET

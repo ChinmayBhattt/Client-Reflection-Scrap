@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import {
   Search,
   Calculator,
@@ -41,8 +42,17 @@ interface RatesClientProps {
 }
 
 export function RatesClient({ categories, items }: RatesClientProps) {
+  const searchParams = useSearchParams();
   const [searchTerm, setSearchTerm] = React.useState("");
   const [selectedCategory, setSelectedCategory] = React.useState<string>("all");
+
+  // React to URL category query parameter
+  React.useEffect(() => {
+    const cat = searchParams.get("category");
+    if (cat) {
+      setSelectedCategory(cat);
+    }
+  }, [searchParams]);
 
   // Calculator State
   const [calcItemId, setCalcItemId] = React.useState<string>(items[0]?.id || "");

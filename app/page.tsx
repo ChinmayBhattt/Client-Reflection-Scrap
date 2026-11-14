@@ -42,12 +42,12 @@ import { Badge } from "@/components/ui/badge";
 const categoryIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   "iron-steel": Anvil,
   copper: Cable,
+  ewaste: CircuitBoard,
   brass: Coins,
   aluminium: Layers,
   "stainless-steel": Shield,
   plastic: Recycle,
   "paper-cardboard": Newspaper,
-  ewaste: CircuitBoard,
   batteries: BatteryCharging,
   appliances: Tv,
 };
@@ -380,9 +380,9 @@ export default async function HomePage() {
                   <div className="h-9 w-9 rounded-lg bg-brand-blue-light text-brand-blue flex items-center justify-center mb-2.5 sm:mb-4">
                     {svc.id === "waste-collection" && <Trash2 className="h-4 w-4" />}
                     {svc.id === "scrap-trading" && <TrendingUp className="h-4 w-4" />}
+                    {svc.id === "ewaste-and-electronics" && <Cpu className="h-4 w-4" />}
                     {svc.id === "recycling" && <Recycle className="h-4 w-4" />}
                     {svc.id === "doorstep-pickup" && <Scale className="h-4 w-4" />}
-                    {svc.id === "ewaste-and-electronics" && <Cpu className="h-4 w-4" />}
                     {svc.id === "bulk-commercial-scrap" && <Building2 className="h-4 w-4" />}
                     {svc.id === "demolition-dismantling" && <HardHat className="h-4 w-4" />}
                   </div>

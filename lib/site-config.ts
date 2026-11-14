@@ -61,6 +61,62 @@ export const SITE_CONFIG = {
       name: "LinkedIn",
       href: "https://www.linkedin.com/company/reflection-scrap-solutions-llp/",
     },
+    {
+      id: "twitter" as const,
+      name: "X (Twitter)",
+      href: "https://x.com/ReflectionScrap",
+    },
+  ],
+
+  // Residential Scrap Navigation Items (3 columns)
+  residentialScrapNav: [
+    // Column 1
+    [
+      { name: "Old Newspaper", href: "/rates?category=paper-cardboard" },
+      { name: "Iron", href: "/rates?category=iron-steel" },
+      { name: "Old Washing Machine", href: "/rates?category=appliances" },
+      { name: "Steel", href: "/rates?category=iron-steel" },
+      { name: "Old Matress", href: "/what-we-accept" },
+    ],
+    // Column 2
+    [
+      { name: "Old Books", href: "/rates?category=paper-cardboard" },
+      { name: "Copper", href: "/rates?category=copper" },
+      { name: "Old Fridge", href: "/rates?category=appliances" },
+      { name: "Aluminium", href: "/rates?category=aluminium" },
+      { name: "Old Furniture", href: "/services#demolition-dismantling" },
+    ],
+    // Column 3
+    [
+      { name: "Plastic", href: "/rates?category=plastic" },
+      { name: "Brass", href: "/rates?category=brass" },
+      { name: "Old Tv", href: "/rates?category=appliances" },
+      { name: "Two Wheeler", href: "/rates?category=iron-steel" },
+    ],
+  ],
+
+  // Commercial E-Waste Navigation Items
+  commercialEwasteNav: [
+    {
+      name: "IT And Electronics Asset Disposition",
+      href: "/services?tab=corporate#ewaste-and-electronics",
+    },
+    {
+      name: "EPR Services",
+      href: "/services?tab=corporate#recycling",
+    },
+    {
+      name: "Data Destruction",
+      href: "/services?tab=corporate#data-destruction",
+    },
+    {
+      name: "Electrical And Electronic Recycling (EEE)",
+      href: "/services?tab=corporate#eee-recycling",
+    },
+    {
+      name: "Office Furniture & Dismantling",
+      href: "/services?tab=corporate#demolition-dismantling",
+    },
   ],
 
   // Core Services
@@ -84,6 +140,15 @@ export const SITE_CONFIG = {
       icon: "TrendingUp",
     },
     {
+      id: "ewaste-and-electronics",
+      title: "E-Waste & Electronics",
+      shortDescription:
+        "Safe disposal and recovery of obsolete computers, electronic appliances, circuit boards, and batteries.",
+      fullDescription:
+        "Electronic waste contains hazardous elements alongside valuable metals. We collect electronic scrap, consumer gadgets, and battery units under rigorous handling protocols for certified processing.",
+      icon: "Cpu",
+    },
+    {
       id: "recycling",
       title: "Recycling",
       shortDescription:
@@ -100,15 +165,6 @@ export const SITE_CONFIG = {
       fullDescription:
         "Book a convenient slot online. Our trained collection personnel arrive at your premises with calibrated digital scales, weigh the materials before you, and pay instantly via UPI or cash.",
       icon: "Truck",
-    },
-    {
-      id: "ewaste-and-electronics",
-      title: "E-Waste & Electronics",
-      shortDescription:
-        "Safe disposal and recovery of obsolete computers, electronic appliances, circuit boards, and batteries.",
-      fullDescription:
-        "Electronic waste contains hazardous elements alongside valuable metals. We collect electronic scrap, consumer gadgets, and battery units under rigorous handling protocols for certified processing.",
-      icon: "Cpu",
     },
     {
       id: "bulk-commercial-scrap",
@@ -201,6 +257,12 @@ export const SITE_CONFIG = {
       icon: "Cable",
     },
     {
+      id: "ewaste",
+      name: "E-Waste",
+      description: "Desktop CPUs, laptops, computer monitors, motherboards, servers, telecom gear, wires.",
+      icon: "CircuitBoard",
+    },
+    {
       id: "brass",
       name: "Brass",
       description: "Brass hardware, fittings, decorative fixtures, plumbing valves, musical instruments.",
@@ -229,12 +291,6 @@ export const SITE_CONFIG = {
       name: "Paper & Cardboard",
       description: "Old corrugated cartons (boxes), newspapers (raddi), office records, shredded documents, magazines.",
       icon: "Newspaper",
-    },
-    {
-      id: "ewaste",
-      name: "E-Waste",
-      description: "Desktop CPUs, laptops, computer monitors, motherboards, servers, telecom gear, wires.",
-      icon: "CircuitBoard",
     },
     {
       id: "batteries",

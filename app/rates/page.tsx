@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 import { TrendingUp, CalendarCheck, ShieldCheck } from "lucide-react";
 import { getScrapCategories, getScrapItems } from "@/lib/services/rates";
 import { RatesClient } from "./rates-client";
@@ -39,7 +40,9 @@ export default async function ScrapRatesPage() {
         </div>
 
         {/* Client Component with Calculator, Search, Filter, and Table */}
-        <RatesClient categories={categories} items={items} />
+        <Suspense fallback={<div className="py-12 text-center text-brand-muted">Loading scrap rates catalog...</div>}>
+          <RatesClient categories={categories} items={items} />
+        </Suspense>
 
         {/* Bottom CTA Card */}
         <div className="rounded-2xl sm:rounded-3xl bg-brand-surface border border-brand-border p-5 sm:p-8 md:p-12 shadow-subtle flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6">
