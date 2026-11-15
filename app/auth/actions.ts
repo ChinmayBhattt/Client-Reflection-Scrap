@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
+import { SITE_CONFIG } from "@/lib/site-config";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -115,7 +116,7 @@ export async function signupWithEmail(formData: FormData) {
         full_name: validated.data.full_name,
         phone: validated.data.phone,
       },
-      emailRedirectTo: `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/auth/callback?next=${encodeURIComponent(
+      emailRedirectTo: `${process.env.NEXT_PUBLIC_APP_URL || SITE_CONFIG.url}/auth/callback?next=${encodeURIComponent(
         validated.data.next || "/dashboard"
       )}`,
     },
@@ -164,7 +165,7 @@ export async function sendPasswordReset(formData: FormData) {
   const { error } = await supabase.auth.resetPasswordForEmail(
     validated.data.email,
     {
-      redirectTo: `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/reset-password`,
+      redirectTo: `${process.env.NEXT_PUBLIC_APP_URL || SITE_CONFIG.url}/reset-password`,
     }
   );
 
