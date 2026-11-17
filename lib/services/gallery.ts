@@ -95,10 +95,35 @@ export const FALLBACK_GALLERY_ITEMS: GalleryItem[] = [
   },
 ];
 
+// In-memory persistent cache for server runtime to ensure instant updates
+// across both database and local environments
+const customGalleryStore = new Map<string, GalleryItem>();
+const deletedGalleryIds = new Set<string>();
+
+export function saveLocalGalleryItem(item: GalleryItem) {
+  customGalleryStore.set(item.id, item);
+  deletedGalleryIds.delete(item.id);
+}
+
+export function deleteLocalGalleryItem(id: string) {
+  deletedGalleryIds.add(id);
+  customGalleryStore.delete(id);
+}
+
 export async function getPublishedGalleryItems(): Promise<GalleryItem[]> {
+  const localList = Array.from(customGalleryStore.values()).filter(
+    (item) => item.is_published && !deletedGalleryIds.has(item.id)
+  );
+
+  const activeFallbacks = FALLBACK_GALLERY_ITEMS.filter(
+    (item) => !deletedGalleryIds.has(item.id)
+  );
+
   try {
     const supabase = await createClient();
-    if (!supabase) return FALLBACK_GALLERY_ITEMS;
+    if (!supabase) {
+      return [...localList, ...activeFallbacks];
+    }
 
     const { data, error } = await supabase
       .from("gallery_items")
@@ -108,19 +133,37 @@ export async function getPublishedGalleryItems(): Promise<GalleryItem[]> {
       .order("created_at", { ascending: false });
 
     if (error || !data || data.length === 0) {
-      return FALLBACK_GALLERY_ITEMS;
+      return [...localList, ...activeFallbacks];
     }
 
-    return data as GalleryItem[];
+    const dbItems = (data as GalleryItem[]).filter(
+      (item) => !deletedGalleryIds.has(item.id)
+    );
+    const dbIds = new Set(dbItems.map((item) => item.id));
+    const uniqueLocal = localList.filter((item) => !dbIds.has(item.id));
+
+    // Combine custom items + database items + fallbacks not already represented
+    const combined = [...uniqueLocal, ...dbItems];
+    return combined.length > 0 ? combined : activeFallbacks;
   } catch {
-    return FALLBACK_GALLERY_ITEMS;
+    return [...localList, ...activeFallbacks];
   }
 }
 
 export async function getAllGalleryItemsAdmin(): Promise<GalleryItem[]> {
+  const localList = Array.from(customGalleryStore.values()).filter(
+    (item) => !deletedGalleryIds.has(item.id)
+  );
+
+  const activeFallbacks = FALLBACK_GALLERY_ITEMS.filter(
+    (item) => !deletedGalleryIds.has(item.id)
+  );
+
   try {
     const supabase = await createClient();
-    if (!supabase) return FALLBACK_GALLERY_ITEMS;
+    if (!supabase) {
+      return [...localList, ...activeFallbacks];
+    }
 
     const { data, error } = await supabase
       .from("gallery_items")
@@ -129,11 +172,18 @@ export async function getAllGalleryItemsAdmin(): Promise<GalleryItem[]> {
       .order("created_at", { ascending: false });
 
     if (error || !data) {
-      return FALLBACK_GALLERY_ITEMS;
+      return [...localList, ...activeFallbacks];
     }
 
-    return data.length > 0 ? (data as GalleryItem[]) : FALLBACK_GALLERY_ITEMS;
+    const dbItems = (data as GalleryItem[]).filter(
+      (item) => !deletedGalleryIds.has(item.id)
+    );
+    const dbIds = new Set(dbItems.map((item) => item.id));
+    const uniqueLocal = localList.filter((item) => !dbIds.has(item.id));
+
+    const combined = [...uniqueLocal, ...dbItems];
+    return combined.length > 0 ? combined : activeFallbacks;
   } catch {
-    return FALLBACK_GALLERY_ITEMS;
+    return [...localList, ...activeFallbacks];
   }
 }

@@ -36,7 +36,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { saveGalleryItem, deleteGalleryItem } from "./actions";
+import { saveGalleryItem, deleteGalleryItem, uploadGalleryPhotoAction } from "./actions";
 
 interface GalleryManagerProps {
   items: GalleryItem[];
@@ -97,32 +97,23 @@ export function GalleryManager({ items }: GalleryManagerProps) {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const supabase = createBrowserClient();
-    if (!supabase) {
-      toast.error("Supabase storage is not configured");
-      return;
-    }
-
     setIsUploading(true);
+    const toastId = toast.loading("Uploading photo...");
     try {
-      const ext = file.name.split(".").pop() || "jpg";
-      const filePath = `activities/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-      const { error } = await supabase.storage
-        .from("gallery-photos")
-        .upload(filePath, file, { upsert: false });
+      const uploadData = new FormData();
+      uploadData.append("file", file);
 
-      if (error) {
-        toast.error(error.message);
-        return;
+      const res = await uploadGalleryPhotoAction(uploadData);
+      if (res.success && res.url) {
+        setFormData((prev) => ({ ...prev, image_url: res.url! }));
+        toast.success("Photo uploaded successfully!", { id: toastId });
+      } else {
+        toast.error(res.error || "Upload failed. Please try again.", {
+          id: toastId,
+        });
       }
-
-      const { data: urlData } = supabase.storage
-        .from("gallery-photos")
-        .getPublicUrl(filePath);
-      setFormData((prev) => ({ ...prev, image_url: urlData.publicUrl }));
-      toast.success("Photo uploaded to storage!");
     } catch {
-      toast.error("Upload failed");
+      toast.error("Upload failed", { id: toastId });
     } finally {
       setIsUploading(false);
     }

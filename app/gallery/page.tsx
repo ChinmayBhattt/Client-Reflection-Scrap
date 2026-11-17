@@ -3,11 +3,12 @@ import Link from "next/link";
 import { Camera, CalendarCheck, HardHat } from "lucide-react";
 import { getPublishedGalleryItems } from "@/lib/services/gallery";
 import { getCurrentUser } from "@/lib/services/user";
+import { isAuthorizedBlogAuthor } from "@/lib/auth-config";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { GalleryClient } from "./gallery-client";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Work Gallery & Field Activities - Mumbai Scrap & Demolition",
@@ -21,7 +22,9 @@ export default async function GalleryPage() {
     getCurrentUser(),
   ]);
 
-  const isAdmin = user?.role === "admin";
+  const isOwner = Boolean(
+    user && (user.role === "admin" || isAuthorizedBlogAuthor(user.email, user.role))
+  );
 
   return (
     <div className="py-12 md:py-20 bg-brand-bg">
@@ -42,7 +45,11 @@ export default async function GalleryPage() {
         </div>
 
         {/* Interactive Gallery */}
-        <GalleryClient items={items} isAdmin={isAdmin} />
+        <GalleryClient
+          items={items}
+          isOwner={isOwner}
+          userEmail={user?.email}
+        />
 
         {/* Bottom CTA */}
         <div className="rounded-3xl bg-brand-surface border border-brand-border p-6 sm:p-10 shadow-subtle flex flex-col md:flex-row items-center justify-between gap-6">

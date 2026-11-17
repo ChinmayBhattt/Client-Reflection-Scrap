@@ -16,6 +16,8 @@ export const AUTHORIZED_BLOG_EMAILS: string[] = [
   "info@reflectionscrap.com",
 ];
 
+export const AUTHORIZED_GALLERY_EMAILS = AUTHORIZED_BLOG_EMAILS;
+
 /**
  * Checks if a given email or role has blog author / editor permissions
  */
@@ -45,3 +47,5 @@ export function isAuthorizedBlogAuthor(
 
   return allAuthorized.includes(cleanEmail);
 }
+
+export const isAuthorizedGalleryAuthor = isAuthorizedBlogAuthor;
