@@ -67,10 +67,17 @@ export async function updateSession(request: NextRequest) {
     },
   });
 
-  // Refresh auth session
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // Refresh auth session with timeout to avoid blocking requests
+  let user = null;
+  try {
+    const timeoutPromise = new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error("Middleware auth timeout")), 2500)
+    );
+    const authRes = (await Promise.race([supabase.auth.getUser(), timeoutPromise])) as any;
+    user = authRes?.data?.user || null;
+  } catch {
+    user = null;
+  }
 
   // Protected customer routes: /dashboard, /book
   const isDashboardRoute = pathname.startsWith("/dashboard");

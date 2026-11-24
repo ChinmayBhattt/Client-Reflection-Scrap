@@ -125,12 +125,20 @@ export async function getPublishedGalleryItems(): Promise<GalleryItem[]> {
       return [...localList, ...activeFallbacks];
     }
 
-    const { data, error } = await supabase
+    const timeoutPromise = new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error("Gallery fetch timeout")), 2500)
+    );
+
+    const fetchPromise = supabase
       .from("gallery_items")
       .select("*")
       .eq("is_published", true)
       .order("sort_order", { ascending: true })
       .order("created_at", { ascending: false });
+
+    const res = (await Promise.race([fetchPromise, timeoutPromise])) as any;
+    const data = res?.data;
+    const error = res?.error;
 
     if (error || !data || data.length === 0) {
       return [...localList, ...activeFallbacks];

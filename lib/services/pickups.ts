@@ -64,15 +64,21 @@ export async function getUserAddresses(userId: string): Promise<Address[]> {
     const supabase = await createClient();
     if (!supabase) return [];
 
-    const { data, error } = await supabase
+    const timeoutPromise = new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error("getUserAddresses timeout")), 2500)
+    );
+
+    const queryPromise = supabase
       .from("addresses")
       .select("*")
       .eq("user_id", userId)
       .order("is_default", { ascending: false })
       .order("created_at", { ascending: false });
 
-    if (error || !data) return [];
-    return data as Address[];
+    const res = (await Promise.race([queryPromise, timeoutPromise])) as any;
+
+    if (res.error || !res.data) return [];
+    return res.data as Address[];
   } catch {
     return [];
   }
@@ -83,7 +89,11 @@ export async function getUserPickups(userId: string): Promise<Pickup[]> {
     const supabase = await createClient();
     if (!supabase) return [];
 
-    const { data, error } = await supabase
+    const timeoutPromise = new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error("getUserPickups timeout")), 2500)
+    );
+
+    const queryPromise = supabase
       .from("pickups")
       .select(`
         *,
@@ -93,8 +103,10 @@ export async function getUserPickups(userId: string): Promise<Pickup[]> {
       .eq("user_id", userId)
       .order("created_at", { ascending: false });
 
-    if (error || !data) return [];
-    return data as Pickup[];
+    const res = (await Promise.race([queryPromise, timeoutPromise])) as any;
+
+    if (res.error || !res.data) return [];
+    return res.data as Pickup[];
   } catch {
     return [];
   }

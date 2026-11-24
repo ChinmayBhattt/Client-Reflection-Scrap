@@ -81,44 +81,79 @@ export const FALLBACK_ITEMS: (ScrapItem & { category: ScrapCategory })[] = [
   { id: "item-32", category_id: "cat-1", name: "Old Metal & Wood Furniture", unit: "piece", rate_per_unit: 400.00, is_active: true, created_at: "", updated_at: new Date().toISOString(), category: CAT_IRON },
 ];
 
+// In-memory cache for fast, instant delivery and resilience against network timeouts
+let cachedCategories: ScrapCategory[] = FALLBACK_CATEGORIES;
+let categoriesCachedAt = 0;
+
+let cachedItems: (ScrapItem & { category?: ScrapCategory })[] = FALLBACK_ITEMS;
+let itemsCachedAt = 0;
+
+const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+
 export async function getScrapCategories(): Promise<ScrapCategory[]> {
+  const now = Date.now();
+  if (now - categoriesCachedAt < CACHE_TTL_MS && cachedCategories.length > 0) {
+    return cachedCategories;
+  }
+
   try {
     const supabase = await createClient();
-    if (!supabase) return FALLBACK_CATEGORIES;
+    if (!supabase) return cachedCategories;
 
-    const { data, error } = await supabase
+    const timeoutPromise = new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error("Categories fetch timeout")), 2500)
+    );
+
+    const fetchPromise = supabase
       .from("scrap_categories")
       .select("*")
       .eq("is_active", true)
       .order("sort_order", { ascending: true });
 
-    if (error || !data || data.length === 0) {
-      return FALLBACK_CATEGORIES;
-    }
+    const res = (await Promise.race([fetchPromise, timeoutPromise])) as any;
 
-    return data as ScrapCategory[];
+    if (!res.error && res.data && res.data.length > 0) {
+      cachedCategories = res.data as ScrapCategory[];
+      categoriesCachedAt = now;
+      return cachedCategories;
+    }
   } catch {
-    return FALLBACK_CATEGORIES;
+    // If timeout or network failure, return current cached data immediately
   }
+
+  return cachedCategories;
 }
 
 export async function getScrapItems(): Promise<(ScrapItem & { category?: ScrapCategory })[]> {
+  const now = Date.now();
+  if (now - itemsCachedAt < CACHE_TTL_MS && cachedItems.length > 0) {
+    return cachedItems;
+  }
+
   try {
     const supabase = await createClient();
-    if (!supabase) return FALLBACK_ITEMS;
+    if (!supabase) return cachedItems;
 
-    const { data, error } = await supabase
+    const timeoutPromise = new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error("Items fetch timeout")), 2500)
+    );
+
+    const fetchPromise = supabase
       .from("scrap_items")
       .select("*, category:scrap_categories(*)")
       .eq("is_active", true)
       .order("name", { ascending: true });
 
-    if (error || !data || data.length === 0) {
-      return FALLBACK_ITEMS;
-    }
+    const res = (await Promise.race([fetchPromise, timeoutPromise])) as any;
 
-    return data as (ScrapItem & { category?: ScrapCategory })[];
+    if (!res.error && res.data && res.data.length > 0) {
+      cachedItems = res.data as (ScrapItem & { category?: ScrapCategory })[];
+      itemsCachedAt = now;
+      return cachedItems;
+    }
   } catch {
-    return FALLBACK_ITEMS;
+    // If timeout or network failure, return current cached data immediately
   }
+
+  return cachedItems;
 }

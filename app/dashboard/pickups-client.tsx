@@ -22,21 +22,23 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 interface PickupsClientProps {
-  pickups: Pickup[];
+  pickups?: Pickup[];
 }
 
-export function PickupsClient({ pickups }: PickupsClientProps) {
+export function PickupsClient({ pickups = [] }: PickupsClientProps) {
+  const safePickups = Array.isArray(pickups) ? pickups : [];
   const [filter, setFilter] = React.useState<"all" | "active" | "completed" | "cancelled">("all");
 
   const filteredPickups = React.useMemo(() => {
-    return pickups.filter((p) => {
+    return safePickups.filter((p) => {
+      if (!p) return false;
       if (filter === "all") return true;
       if (filter === "active") return ["pending", "confirmed", "scheduled", "picked_up"].includes(p.status);
       if (filter === "completed") return p.status === "completed";
       if (filter === "cancelled") return p.status === "cancelled";
       return true;
     });
-  }, [pickups, filter]);
+  }, [safePickups, filter]);
 
   const getStatusBadge = (status: PickupStatus) => {
     switch (status) {
@@ -67,7 +69,7 @@ export function PickupsClient({ pickups }: PickupsClientProps) {
           onClick={() => setFilter("all")}
           className="text-xs rounded-full"
         >
-          All Bookings ({pickups.length})
+          All Bookings ({safePickups.length})
         </Button>
         <Button
           size="sm"
