@@ -8,10 +8,35 @@ export async function updateSession(request: NextRequest) {
     },
   });
 
+  const pathname = request.nextUrl.pathname;
+  const code = request.nextUrl.searchParams.get("code");
+  const hasAuthCookie = request.cookies.getAll().some((c) => c.name.startsWith("sb-"));
+
+  // If a confirmation / magic link email redirects with ?code= to root or another page,
+  // route it through /auth/callback so the session is securely exchanged and established
+  if (code && pathname !== "/auth/callback") {
+    const url = request.nextUrl.clone();
+    url.pathname = "/auth/callback";
+    return NextResponse.redirect(url);
+  }
+
+  // Fast-path optimization: If no auth cookie exists, skip Supabase network calls
+  if (!hasAuthCookie) {
+    // 1. Unauthenticated users attempting to access /dashboard or /book
+    if (pathname.startsWith("/dashboard") || pathname.startsWith("/book") || pathname.startsWith("/admin")) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/login";
+      url.searchParams.set("next", pathname);
+      return NextResponse.redirect(url);
+    }
+    // Public routes: return immediately with zero network overhead
+    return supabaseResponse;
+  }
+
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  // If Supabase keys are not configured, allow public navigation without breaking
+  // If Supabase keys are not configured, allow navigation without breaking
   if (!supabaseUrl || !supabaseAnonKey) {
     return supabaseResponse;
   }
@@ -46,17 +71,6 @@ export async function updateSession(request: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
-  const pathname = request.nextUrl.pathname;
-  const code = request.nextUrl.searchParams.get("code");
-
-  // If a confirmation / magic link email redirects with ?code= to root or another page,
-  // route it through /auth/callback so the session is securely exchanged and established
-  if (code && pathname !== "/auth/callback") {
-    const url = request.nextUrl.clone();
-    url.pathname = "/auth/callback";
-    return NextResponse.redirect(url);
-  }
 
   // Protected customer routes: /dashboard, /book
   const isDashboardRoute = pathname.startsWith("/dashboard");

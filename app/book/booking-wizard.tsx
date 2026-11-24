@@ -330,7 +330,7 @@ export function BookingWizard({
     )}`;
 
     return (
-      <Card className="rounded-3xl border border-brand-border bg-white shadow-elevated p-8 md:p-12 max-w-2xl mx-auto text-center space-y-8 animate-in zoom-in-95 duration-200">
+      <Card className="rounded-3xl border border-brand-border bg-brand-surface shadow-elevated p-8 md:p-12 max-w-2xl mx-auto text-center space-y-8 animate-in zoom-in-95 duration-200">
         <div className="h-20 w-20 rounded-full bg-brand-green-light text-brand-green flex items-center justify-center mx-auto shadow-subtle">
           <CheckCircle2 className="h-10 w-10" />
         </div>
@@ -398,13 +398,13 @@ export function BookingWizard({
   return (
     <div className="space-y-8 max-w-4xl mx-auto">
       {/* Pickup Type Toggle (Doorstep vs Yard Drop-off) */}
-      <div className="grid grid-cols-2 gap-3 p-1.5 rounded-2xl bg-gray-100 border border-brand-border">
+      <div className="grid grid-cols-2 gap-3 p-1.5 rounded-2xl bg-muted border border-brand-border">
         <button
           type="button"
           onClick={() => setPickupType("doorstep")}
           className={`flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-bold text-sm transition-all duration-150 ${
             pickupType === "doorstep"
-              ? "bg-white text-brand-dark shadow-sm border border-brand-border"
+              ? "bg-brand-surface text-brand-dark shadow-sm border border-brand-border"
               : "text-brand-muted hover:text-brand-dark"
           }`}
         >
@@ -417,7 +417,7 @@ export function BookingWizard({
           onClick={() => setPickupType("dropoff")}
           className={`flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-bold text-sm transition-all duration-150 ${
             pickupType === "dropoff"
-              ? "bg-white text-brand-dark shadow-sm border border-brand-border"
+              ? "bg-brand-surface text-brand-dark shadow-sm border border-brand-border"
               : "text-brand-muted hover:text-brand-dark"
           }`}
         >
@@ -462,7 +462,7 @@ export function BookingWizard({
       {/* STEP 1: SCRAP ITEMS */}
       {/* --------------------------------------------------------- */}
       {step === 1 && (
-        <Card className="rounded-3xl border border-brand-border bg-white shadow-card p-6 md:p-8 space-y-6">
+        <Card className="rounded-3xl border border-brand-border bg-brand-surface shadow-card p-6 md:p-8 space-y-6">
           <div className="flex items-center justify-between border-b border-brand-border pb-4">
             <div>
               <CardTitle className="text-xl font-bold text-brand-dark">
@@ -519,7 +519,7 @@ export function BookingWizard({
                         value={row.itemId}
                         onValueChange={(val) => updateItemRow(row.rowId, "itemId", val)}
                       >
-                        <SelectTrigger className="bg-white">
+                        <SelectTrigger className="bg-brand-surface">
                           <SelectValue placeholder="Select scrap item" />
                         </SelectTrigger>
                         <SelectContent>
@@ -551,7 +551,7 @@ export function BookingWizard({
                             )
                           }
                           placeholder="e.g. 10"
-                          className="bg-white pr-10 font-bold"
+                          className="bg-brand-surface pr-10 font-bold"
                         />
                         <span className="absolute right-3 top-3 text-xs text-brand-muted font-bold uppercase">
                           {selectedItem?.unit || "kg"}
@@ -562,7 +562,7 @@ export function BookingWizard({
                     {/* Rate preview & Row Total */}
                     <div className="md:col-span-3 space-y-1">
                       <Label className="text-xs">Estimated Value</Label>
-                      <div className="h-11 px-3.5 rounded-lg bg-white border border-brand-border flex items-center justify-between text-xs font-bold text-brand-dark">
+                      <div className="h-11 px-3.5 rounded-lg bg-brand-surface border border-brand-border flex items-center justify-between text-xs font-bold text-brand-dark">
                         <span className="text-brand-muted text-[11px]">
                           {selectedItem?.rate_per_unit
                             ? `${formatCurrency(selectedItem.rate_per_unit)}/${selectedItem.unit}`
@@ -582,7 +582,7 @@ export function BookingWizard({
                       placeholder="Optional notes (e.g. in 2 cardboard boxes, 3rd floor, copper armature only)..."
                       value={row.notes}
                       onChange={(e) => updateItemRow(row.rowId, "notes", e.target.value)}
-                      className="bg-white text-xs h-9"
+                      className="bg-brand-surface text-xs h-9"
                     />
                   </div>
                 </div>
@@ -623,7 +623,7 @@ export function BookingWizard({
       {/* STEP 2: ADDRESS (Doorstep) or YARD INFO (Dropoff) */}
       {/* --------------------------------------------------------- */}
       {step === 2 && (
-        <Card className="rounded-3xl border border-brand-border bg-white shadow-card p-6 md:p-8 space-y-6">
+        <Card className="rounded-3xl border border-brand-border bg-brand-surface shadow-card p-6 md:p-8 space-y-6">
           <div className="border-b border-brand-border pb-4">
             <CardTitle className="text-xl font-bold text-brand-dark">
               {pickupType === "doorstep"
@@ -653,7 +653,7 @@ export function BookingWizard({
                         className={`p-4 rounded-xl border cursor-pointer transition-all ${
                           selectedAddressId === addr.id
                             ? "border-brand-blue bg-brand-blue-light/30 ring-2 ring-brand-blue"
-                            : "border-brand-border bg-white hover:border-gray-300"
+                            : "border-brand-border bg-brand-surface hover:border-brand-blue"
                         }`}
                       >
                         <div className="flex items-center justify-between">
@@ -851,7 +851,7 @@ export function BookingWizard({
                 </div>
               </div>
 
-              <div className="p-3 bg-white rounded-xl border border-brand-border text-xs text-brand-muted">
+              <div className="p-3 bg-brand-surface rounded-xl border border-brand-border text-xs text-brand-muted">
                 <strong>No address input needed!</strong> Simply select your drop-off
                 day in the next step so our yard weighing operators know to expect you.
               </div>
@@ -875,7 +875,7 @@ export function BookingWizard({
       {/* STEP 3: SCHEDULE */}
       {/* --------------------------------------------------------- */}
       {step === 3 && (
-        <Card className="rounded-3xl border border-brand-border bg-white shadow-card p-6 md:p-8 space-y-6">
+        <Card className="rounded-3xl border border-brand-border bg-brand-surface shadow-card p-6 md:p-8 space-y-6">
           <div className="border-b border-brand-border pb-4">
             <CardTitle className="text-xl font-bold text-brand-dark">
               Step 3: Choose Date & Time Slot
@@ -897,7 +897,7 @@ export function BookingWizard({
                 max={maxDate}
                 value={slotDate}
                 onChange={(e) => setSlotDate(e.target.value)}
-                className="h-12 bg-white text-base font-semibold"
+                className="h-12 bg-brand-surface text-base font-semibold"
               />
             </div>
 
@@ -914,7 +914,7 @@ export function BookingWizard({
                     className={`p-4 rounded-xl border text-left transition-all ${
                       slotTime === slot.label
                         ? "border-brand-blue bg-brand-blue-light/40 ring-2 ring-brand-blue"
-                        : "border-brand-border bg-white hover:border-gray-300"
+                        : "border-brand-border bg-brand-surface hover:border-brand-blue"
                     }`}
                   >
                     <span className="text-[11px] font-bold text-brand-blue uppercase tracking-wider block">
@@ -946,7 +946,7 @@ export function BookingWizard({
       {/* STEP 4: PHOTOS (OPTIONAL) */}
       {/* --------------------------------------------------------- */}
       {step === 4 && (
-        <Card className="rounded-3xl border border-brand-border bg-white shadow-card p-6 md:p-8 space-y-6">
+        <Card className="rounded-3xl border border-brand-border bg-brand-surface shadow-card p-6 md:p-8 space-y-6">
           <div className="border-b border-brand-border pb-4">
             <div className="flex items-center justify-between">
               <div>
@@ -1027,7 +1027,7 @@ export function BookingWizard({
       {/* STEP 5: REVIEW & CONFIRM */}
       {/* --------------------------------------------------------- */}
       {step === 5 && (
-        <Card className="rounded-3xl border border-brand-border bg-white shadow-elevated p-6 md:p-8 space-y-6">
+        <Card className="rounded-3xl border border-brand-border bg-brand-surface shadow-elevated p-6 md:p-8 space-y-6">
           <div className="border-b border-brand-border pb-4">
             <CardTitle className="text-2xl font-extrabold text-brand-dark">
               Step 5: Review & Confirm Your Booking

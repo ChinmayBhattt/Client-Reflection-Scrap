@@ -151,7 +151,7 @@ export function AddressesClient({ addresses }: AddressesClientProps) {
               className={`rounded-2xl border transition-all duration-150 ${
                 addr.is_default
                   ? "border-brand-blue bg-brand-blue-light/10 shadow-card"
-                  : "border-brand-border bg-white shadow-subtle"
+                  : "border-brand-border bg-brand-surface shadow-subtle"
               }`}
             >
               <CardContent className="p-6 space-y-4">
@@ -217,7 +217,7 @@ export function AddressesClient({ addresses }: AddressesClientProps) {
           ))}
         </div>
       ) : (
-        <Card className="rounded-3xl border border-dashed border-brand-border bg-white p-10 text-center space-y-4">
+        <Card className="rounded-3xl border border-dashed border-brand-border bg-brand-surface p-10 text-center space-y-4">
           <div className="h-14 w-14 rounded-2xl bg-brand-blue-light text-brand-blue flex items-center justify-center mx-auto">
             <MapPin className="h-7 w-7" />
           </div>

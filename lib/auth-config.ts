@@ -13,7 +13,7 @@ export const AUTHORIZED_BLOG_EMAILS: string[] = [
   // Primary Authorized Owners & Authors
   "ayjazkhan68@gmail.com",
   "chinmaybhatt26@gmail.com",
-  "info@reflectionscrap.com",
+  "info@reflectionscrapsolutions.in",
 ];
 
 export const AUTHORIZED_GALLERY_EMAILS = AUTHORIZED_BLOG_EMAILS;

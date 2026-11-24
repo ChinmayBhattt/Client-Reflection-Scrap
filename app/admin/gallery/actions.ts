@@ -29,7 +29,7 @@ async function requireAdminClient() {
     return {
       error: null,
       supabase: null,
-      user: { email: "local-owner@reflectionscrap.com", id: "local-owner" },
+      user: { email: "local-owner@reflectionscrapsolutions.in", id: "local-owner" },
     };
   }
 

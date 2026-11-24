@@ -37,7 +37,7 @@ export default function ResetPasswordPage() {
 
   return (
     <div className="py-12 md:py-20 bg-brand-bg min-h-[75vh] flex items-center justify-center px-4">
-      <Card className="w-full max-w-md mx-auto rounded-3xl border border-brand-border bg-white shadow-elevated overflow-hidden">
+      <Card className="w-full max-w-md mx-auto rounded-3xl border border-brand-border bg-brand-surface shadow-elevated overflow-hidden">
         <CardHeader className="text-center space-y-2 pb-6 border-b border-brand-border/60">
           <div className="h-12 w-12 rounded-2xl bg-brand-blue-light text-brand-blue flex items-center justify-center mx-auto">
             <Lock className="h-6 w-6" />

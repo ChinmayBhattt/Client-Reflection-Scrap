@@ -279,7 +279,7 @@ export function BlogEditorModal({
                         : "border-brand-border bg-muted/40 hover:bg-muted"
                     }`}
                   >
-                    <div className="aspect-[16/9] rounded-lg overflow-hidden bg-white mb-1.5 border border-brand-border/60">
+                    <div className="aspect-[16/9] rounded-lg overflow-hidden bg-brand-surface mb-1.5 border border-brand-border/60">
                       <img src={preset.url} alt={preset.label} className="w-full h-full object-cover" />
                     </div>
                     <p className="text-[11px] font-bold text-brand-dark truncate">{preset.label}</p>

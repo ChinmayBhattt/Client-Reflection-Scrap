@@ -133,7 +133,7 @@ export function LoginClient() {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto rounded-3xl border border-brand-border bg-white shadow-elevated overflow-hidden">
+    <Card className="w-full max-w-md mx-auto rounded-3xl border border-brand-border bg-brand-surface shadow-elevated overflow-hidden">
       <CardHeader className="text-center space-y-2 pb-6 border-b border-brand-border/60">
         <div className="h-12 w-12 rounded-2xl bg-brand-blue-light text-brand-blue flex items-center justify-center mx-auto">
           <LogIn className="h-6 w-6" />
@@ -153,7 +153,7 @@ export function LoginClient() {
           variant="outline"
           onClick={handleGoogleLogin}
           disabled={isGoogleLoading || isLoading}
-          className="w-full h-12 gap-3 text-sm font-semibold border-brand-border hover:bg-gray-50"
+          className="w-full h-12 gap-3 text-sm font-semibold border-brand-border bg-brand-surface text-brand-dark hover:bg-brand-blue-light/40"
         >
           {isGoogleLoading ? (
             <Loader2 className="h-4 w-4 animate-spin" />
@@ -182,7 +182,7 @@ export function LoginClient() {
 
         <div className="relative flex items-center justify-center">
           <div className="border-t border-brand-border w-full" />
-          <span className="bg-white px-3 text-xs uppercase font-bold text-brand-muted shrink-0">
+          <span className="bg-brand-surface px-3 text-xs uppercase font-bold text-brand-muted shrink-0">
             Or with email
           </span>
           <div className="border-t border-brand-border w-full" />
@@ -190,12 +190,12 @@ export function LoginClient() {
 
         {/* Feature Flag Toggle for Phone OTP */}
         {enablePhoneOtp && (
-          <div className="flex rounded-xl bg-gray-100 p-1 text-xs font-semibold">
+          <div className="flex rounded-xl bg-muted p-1 text-xs font-semibold">
             <button
               type="button"
               onClick={() => setAuthMode("email")}
               className={`flex-1 py-1.5 rounded-lg transition-colors ${
-                authMode === "email" ? "bg-white text-brand-dark shadow-sm" : "text-brand-muted"
+                authMode === "email" ? "bg-brand-surface text-brand-dark shadow-sm" : "text-brand-muted"
               }`}
             >
               Email & Password
@@ -204,7 +204,7 @@ export function LoginClient() {
               type="button"
               onClick={() => setAuthMode("phone")}
               className={`flex-1 py-1.5 rounded-lg transition-colors ${
-                authMode === "phone" ? "bg-white text-brand-dark shadow-sm" : "text-brand-muted"
+                authMode === "phone" ? "bg-brand-surface text-brand-dark shadow-sm" : "text-brand-muted"
               }`}
             >
               Phone OTP

@@ -91,7 +91,7 @@ export default function AboutPage() {
           <div className="lg:col-span-6">
             <Card className="border border-brand-border bg-brand-surface shadow-elevated p-8 rounded-3xl space-y-6">
               <div className="flex items-center gap-4 pb-6 border-b border-brand-border">
-                <div className="h-16 w-16 rounded-2xl bg-white p-2 flex items-center justify-center border border-brand-border">
+                <div className="h-16 w-16 rounded-2xl bg-brand-surface p-2 flex items-center justify-center border border-brand-border">
                   <Image
                     src="/logo-icon.png"
                     alt="Reflection Scrap Solutions LLP"

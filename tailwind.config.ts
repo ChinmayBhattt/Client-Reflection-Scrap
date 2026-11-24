@@ -4,8 +4,10 @@ const config: Config = {
   darkMode: [
     "variant",
     [
-      "@media (prefers-color-scheme: dark) { &:not(:root:has(> head > meta[name=\"color-scheme\"][content=\"light\"]) *) }",
+      ".dark &",
+      ":root.dark &",
       ":root:has(> head > meta[name=\"color-scheme\"][content=\"dark\"]) &",
+      "@media (prefers-color-scheme: dark) { &:not(:root:has(> head > meta[name=\"color-scheme\"][content=\"light\"]) *):not(.light *) }",
     ],
   ],
   content: [

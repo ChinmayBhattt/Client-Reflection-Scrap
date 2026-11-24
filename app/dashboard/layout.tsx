@@ -37,7 +37,7 @@ export default async function DashboardLayout({
     <div className="py-8 md:py-12 bg-brand-bg min-h-screen">
       <div className="container space-y-8">
         {/* User Summary Header */}
-        <div className="rounded-3xl border border-brand-border bg-white p-6 sm:p-8 shadow-subtle flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="rounded-3xl border border-brand-border bg-brand-surface p-6 sm:p-8 shadow-subtle flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <div className="h-16 w-16 rounded-2xl bg-brand-blue text-white flex items-center justify-center font-black text-2xl uppercase shadow-sm">
               {user?.full_name ? user.full_name[0] : user?.email ? user.email[0] : "U"}
@@ -52,7 +52,7 @@ export default async function DashboardLayout({
                 </Badge>
               </div>
               <p className="text-xs sm:text-sm text-brand-muted mt-0.5">
-                {user?.email || "customer@reflectionscrap.com"}
+                {user?.email || "customer@reflectionscrapsolutions.in"}
               </p>
             </div>
           </div>
@@ -75,7 +75,7 @@ export default async function DashboardLayout({
         {/* Dashboard Navigation Tabs */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           <aside className="lg:col-span-3 space-y-4">
-            <div className="rounded-2xl border border-brand-border bg-white p-2 shadow-subtle space-y-1">
+            <div className="rounded-2xl border border-brand-border bg-brand-surface p-2 shadow-subtle space-y-1">
               {navItems.map((item) => {
                 const Icon = item.icon;
                 return (
@@ -92,7 +92,7 @@ export default async function DashboardLayout({
             </div>
 
             {/* Quick Yard Info Card */}
-            <div className="rounded-2xl border border-brand-border bg-white p-5 shadow-subtle space-y-3 text-xs">
+            <div className="rounded-2xl border border-brand-border bg-brand-surface p-5 shadow-subtle space-y-3 text-xs">
               <div className="flex items-center gap-2 font-bold text-brand-dark">
                 <Clock className="h-4 w-4 text-brand-green" />
                 <span>Need Yard Drop-off?</span>

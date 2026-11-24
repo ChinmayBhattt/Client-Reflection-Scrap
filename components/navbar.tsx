@@ -126,7 +126,7 @@ export function Navbar({ user: initialUser }: NavbarProps) {
             href="/"
             className="flex items-center gap-2 xl:gap-2.5 shrink-0 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-xl"
           >
-            <div className="relative h-9 w-9 sm:h-10 sm:w-10 shrink-0 overflow-hidden rounded-xl border border-brand-border bg-white shadow-sm flex items-center justify-center p-1.5 transition-transform group-hover:scale-105">
+            <div className="relative h-9 w-9 sm:h-10 sm:w-10 shrink-0 overflow-hidden rounded-xl border border-brand-border bg-brand-surface shadow-sm flex items-center justify-center p-1.5 transition-transform group-hover:scale-105">
               <Image
                 src="/logo-icon.png"
                 alt="Reflection Scrap Solutions LLP Logo"
@@ -195,7 +195,7 @@ export function Navbar({ user: initialUser }: NavbarProps) {
               {/* Residential Dropdown Card */}
               {activeDropdown === "residential" && (
                 <div
-                  className="absolute top-full left-0 mt-1.5 w-[560px] xl:w-[600px] rounded-2xl border border-brand-border bg-white dark:bg-[#181F24] p-5 xl:p-6 shadow-2xl z-50 animate-in fade-in-0 zoom-in-95 duration-150"
+                  className="absolute top-full left-0 mt-1.5 w-[560px] xl:w-[600px] rounded-2xl border border-brand-border bg-brand-surface p-5 xl:p-6 shadow-2xl z-50 animate-in fade-in-0 zoom-in-95 duration-150"
                   onMouseEnter={() => handleDropdownEnter("residential")}
                   onMouseLeave={handleDropdownLeave}
                 >
@@ -207,7 +207,7 @@ export function Navbar({ user: initialUser }: NavbarProps) {
                             key={item.name}
                             href={item.href}
                             onClick={() => setActiveDropdown(null)}
-                            className="flex items-center gap-2 text-xs xl:text-[13px] font-medium text-gray-700 dark:text-gray-200 hover:text-brand-green transition-all py-1 group hover:translate-x-0.5"
+                            className="flex items-center gap-2 text-xs xl:text-[13px] font-medium text-brand-dark/90 hover:text-brand-green transition-all py-1 group hover:translate-x-0.5"
                           >
                             <svg
                               className="h-2 w-2 text-brand-green shrink-0 fill-current group-hover:scale-125 transition-transform"
@@ -259,7 +259,7 @@ export function Navbar({ user: initialUser }: NavbarProps) {
               {/* Commercial Dropdown Card */}
               {activeDropdown === "commercial" && (
                 <div
-                  className="absolute top-full left-0 mt-1.5 w-[360px] xl:w-[380px] rounded-2xl border border-brand-border bg-white dark:bg-[#181F24] p-4 xl:p-5 shadow-2xl z-50 animate-in fade-in-0 zoom-in-95 duration-150"
+                  className="absolute top-full left-0 mt-1.5 w-[360px] xl:w-[380px] rounded-2xl border border-brand-border bg-brand-surface p-4 xl:p-5 shadow-2xl z-50 animate-in fade-in-0 zoom-in-95 duration-150"
                   onMouseEnter={() => handleDropdownEnter("commercial")}
                   onMouseLeave={handleDropdownLeave}
                 >
@@ -269,7 +269,7 @@ export function Navbar({ user: initialUser }: NavbarProps) {
                         key={item.name}
                         href={item.href}
                         onClick={() => setActiveDropdown(null)}
-                        className="flex items-center gap-2.5 text-xs xl:text-[13px] font-medium text-gray-700 dark:text-gray-200 hover:text-brand-green transition-all py-2 px-2.5 rounded-xl hover:bg-brand-green-light/40 group hover:translate-x-0.5"
+                        className="flex items-center gap-2.5 text-xs xl:text-[13px] font-medium text-brand-dark/90 hover:text-brand-green transition-all py-2 px-2.5 rounded-xl hover:bg-brand-green-light/40 group hover:translate-x-0.5"
                       >
                         <svg
                           className="h-2.5 w-2.5 text-brand-green shrink-0 fill-current group-hover:scale-125 transition-transform"
@@ -358,7 +358,7 @@ export function Navbar({ user: initialUser }: NavbarProps) {
               {/* More Dropdown Card */}
               {activeDropdown === "more" && (
                 <div
-                  className="absolute top-full left-0 mt-1.5 w-64 xl:w-72 rounded-2xl border border-brand-border bg-white dark:bg-[#181F24] p-2.5 shadow-2xl z-50 animate-in fade-in-0 zoom-in-95 duration-150"
+                  className="absolute top-full left-0 mt-1.5 w-64 xl:w-72 rounded-2xl border border-brand-border bg-brand-surface p-2.5 shadow-2xl z-50 animate-in fade-in-0 zoom-in-95 duration-150"
                   onMouseEnter={() => handleDropdownEnter("more")}
                   onMouseLeave={handleDropdownLeave}
                 >

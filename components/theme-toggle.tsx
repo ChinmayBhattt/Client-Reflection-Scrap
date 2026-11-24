@@ -24,6 +24,19 @@ function applyMetaScheme(scheme: "light" | "dark" | null) {
   if (meta) {
     meta.content = scheme ?? "light dark";
   }
+  const root = document.documentElement;
+  if (scheme === "dark") {
+    root.classList.add("dark");
+    root.classList.remove("light");
+  } else if (scheme === "light") {
+    root.classList.add("light");
+    root.classList.remove("dark");
+  } else {
+    root.classList.remove("dark", "light");
+    if (getSystemScheme() === "dark") {
+      root.classList.add("dark");
+    }
+  }
 }
 
 interface ThemeToggleProps {
@@ -36,6 +49,10 @@ interface ThemeToggleProps {
  */
 export function ThemeToggle({ className }: ThemeToggleProps) {
   React.useEffect(() => {
+    // Initial sync
+    const stored = getStoredScheme();
+    applyMetaScheme(stored);
+
     const handleStorage = (event: StorageEvent) => {
       if (event.key === STORAGE_KEY) {
         const next = event.newValue === "light" || event.newValue === "dark" ? event.newValue : null;

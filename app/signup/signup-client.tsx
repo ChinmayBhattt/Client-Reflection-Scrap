@@ -106,7 +106,7 @@ export function SignupClient() {
 
   if (verificationSent) {
     return (
-      <Card className="w-full max-w-md mx-auto rounded-3xl border border-brand-border bg-white shadow-elevated p-8 text-center space-y-6">
+      <Card className="w-full max-w-md mx-auto rounded-3xl border border-brand-border bg-brand-surface shadow-elevated p-8 text-center space-y-6">
         <div className="h-16 w-16 rounded-2xl bg-brand-green-light text-brand-green flex items-center justify-center mx-auto">
           <CheckCircle2 className="h-8 w-8" />
         </div>
@@ -127,7 +127,7 @@ export function SignupClient() {
   }
 
   return (
-    <Card className="w-full max-w-md mx-auto rounded-3xl border border-brand-border bg-white shadow-elevated overflow-hidden">
+    <Card className="w-full max-w-md mx-auto rounded-3xl border border-brand-border bg-brand-surface shadow-elevated overflow-hidden">
       <CardHeader className="text-center space-y-2 pb-6 border-b border-brand-border/60">
         <div className="h-12 w-12 rounded-2xl bg-brand-green-light text-brand-green flex items-center justify-center mx-auto">
           <UserPlus className="h-6 w-6" />
@@ -147,7 +147,7 @@ export function SignupClient() {
           variant="outline"
           onClick={handleGoogleSignup}
           disabled={isGoogleLoading || isLoading}
-          className="w-full h-12 gap-3 text-sm font-semibold border-brand-border hover:bg-gray-50"
+          className="w-full h-12 gap-3 text-sm font-semibold border-brand-border bg-brand-surface text-brand-dark hover:bg-brand-blue-light/40"
         >
           {isGoogleLoading ? (
             <Loader2 className="h-4 w-4 animate-spin" />
@@ -176,7 +176,7 @@ export function SignupClient() {
 
         <div className="relative flex items-center justify-center">
           <div className="border-t border-brand-border w-full" />
-          <span className="bg-white px-3 text-xs uppercase font-bold text-brand-muted shrink-0">
+          <span className="bg-brand-surface px-3 text-xs uppercase font-bold text-brand-muted shrink-0">
             Or register with email
           </span>
           <div className="border-t border-brand-border w-full" />

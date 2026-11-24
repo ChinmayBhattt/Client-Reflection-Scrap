@@ -10,7 +10,7 @@ export default function DashboardLoading() {
         {[1, 2, 3].map((i) => (
           <div
             key={i}
-            className="h-28 rounded-2xl border border-brand-border bg-white p-6 animate-pulse"
+            className="h-28 rounded-2xl border border-brand-border bg-brand-surface p-6 animate-pulse"
           />
         ))}
       </div>

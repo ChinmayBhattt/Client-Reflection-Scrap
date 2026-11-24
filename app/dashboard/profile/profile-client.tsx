@@ -39,7 +39,7 @@ export function ProfileClient({ user }: ProfileClientProps) {
   };
 
   return (
-    <Card className="rounded-3xl border border-brand-border bg-white shadow-card p-6 sm:p-8 space-y-6 max-w-xl">
+    <Card className="rounded-3xl border border-brand-border bg-brand-surface shadow-card p-6 sm:p-8 space-y-6 max-w-xl">
       <div className="border-b border-brand-border pb-4">
         <CardTitle className="text-xl font-bold text-brand-dark">
           Personal Profile & Contact

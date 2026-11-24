@@ -118,7 +118,7 @@ export function PickupDetailClient({ pickup }: PickupDetailClientProps) {
       </div>
 
       {/* Main Overview Card */}
-      <Card className="rounded-3xl border border-brand-border bg-white shadow-card p-6 sm:p-8 space-y-6">
+      <Card className="rounded-3xl border border-brand-border bg-brand-surface shadow-card p-6 sm:p-8 space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-brand-border">
           <div>
             <div className="flex items-center gap-3">
@@ -320,7 +320,7 @@ export function PickupDetailClient({ pickup }: PickupDetailClientProps) {
       {/* Cancel Confirmation Modal */}
       {showCancelDialog && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in-0 duration-200">
-          <Card className="w-full max-w-md bg-white rounded-3xl p-6 space-y-4 shadow-elevated">
+          <Card className="w-full max-w-md bg-brand-surface rounded-3xl p-6 space-y-4 shadow-elevated">
             <div className="flex items-center gap-3 text-red-600">
               <AlertCircle className="h-6 w-6" />
               <h3 className="font-bold text-lg text-brand-dark">

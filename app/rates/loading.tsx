@@ -12,7 +12,7 @@ export default function RatesLoading() {
         <div className="h-48 rounded-3xl bg-gray-200 animate-pulse" />
 
         {/* Table skeleton */}
-        <div className="rounded-3xl border border-brand-border bg-white p-6 space-y-4">
+        <div className="rounded-3xl border border-brand-border bg-brand-surface p-6 space-y-4">
           <div className="h-8 w-48 bg-gray-100 rounded-lg animate-pulse" />
           <div className="space-y-3">
             {[1, 2, 3, 4, 5, 6].map((i) => (

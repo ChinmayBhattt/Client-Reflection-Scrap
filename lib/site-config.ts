@@ -5,7 +5,7 @@ export const SITE_CONFIG = {
   llpin: "LLPIN ACY-4261",
   description:
     "Reflection Scrap Solutions LLP is a premier waste collection and scrap trading company based in MIDC, Andheri East, Mumbai. We provide doorstep scrap collection, on-the-spot accurate digital weighing, and instant payment for recyclables, industrial scrap, and electronics.",
-  url: process.env.NEXT_PUBLIC_APP_URL || "https://reflectionscrap.com",
+  url: process.env.NEXT_PUBLIC_APP_URL || "https://reflectionscrapsolutions.in",
   
   // Location & Address
   address: {
@@ -42,7 +42,7 @@ export const SITE_CONFIG = {
     phoneTertiaryRaw: "+919821209541",
     whatsapp: "+91 77389 88646",
     whatsappRaw: "917738988646",
-    email: "info@reflectionscrap.com",
+    email: "info@reflectionscrapsolutions.in",
     whatsappMessage: "Hello Reflection Scrap Solutions, I would like to schedule a scrap pickup.",
   },
 

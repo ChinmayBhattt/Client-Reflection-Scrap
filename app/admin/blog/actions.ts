@@ -28,7 +28,7 @@ async function requireAuthorClient() {
   const supabase = await createClient();
 
   if (!supabase) {
-    return { error: null, supabase: null, user: { email: "local-owner@reflectionscrap.com", id: "local-owner" } };
+    return { error: null, supabase: null, user: { email: "local-owner@reflectionscrapsolutions.in", id: "local-owner" } };
   }
 
   const {

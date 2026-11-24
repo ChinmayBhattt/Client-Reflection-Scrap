@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
 import { isAuthorizedBlogAuthor } from "@/lib/auth-config";
 
@@ -9,6 +10,10 @@ export async function getCurrentUser(): Promise<{
   canWriteBlog: boolean;
 } | null> {
   try {
+    const cookieStore = cookies();
+    const hasAuthCookie = cookieStore.getAll().some((c) => c.name.startsWith("sb-"));
+    if (!hasAuthCookie) return null;
+
     const supabase = await createClient();
     if (!supabase) return null;
 

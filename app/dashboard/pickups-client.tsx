@@ -105,7 +105,7 @@ export function PickupsClient({ pickups }: PickupsClientProps) {
             return (
               <Card
                 key={pickup.id}
-                className="rounded-2xl border border-brand-border bg-white shadow-subtle hover:border-brand-blue transition-all duration-200 overflow-hidden"
+                className="rounded-2xl border border-brand-border bg-brand-surface shadow-subtle hover:border-brand-blue transition-all duration-200 overflow-hidden"
               >
                 <CardContent className="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
                   <div className="space-y-3">
@@ -165,7 +165,7 @@ export function PickupsClient({ pickups }: PickupsClientProps) {
         </div>
       ) : (
         /* Empty State */
-        <Card className="rounded-3xl border border-dashed border-brand-border bg-white p-12 text-center space-y-4 shadow-subtle">
+        <Card className="rounded-3xl border border-dashed border-brand-border bg-brand-surface p-12 text-center space-y-4 shadow-subtle">
           <div className="h-16 w-16 rounded-2xl bg-brand-blue-light text-brand-blue flex items-center justify-center mx-auto">
             <Package className="h-8 w-8" />
           </div>

@@ -411,7 +411,7 @@ export function GalleryEditorModal({
                       className={`relative text-left p-2 rounded-xl border text-xs transition-all ${
                         isSelected
                           ? "border-brand-green bg-brand-green-light/40 ring-2 ring-brand-green font-semibold"
-                          : "border-brand-border bg-white hover:border-brand-blue"
+                          : "border-brand-border bg-brand-surface hover:border-brand-blue"
                       }`}
                     >
                       <div className="aspect-[16/10] rounded-lg overflow-hidden bg-muted mb-1 border border-brand-border/60">

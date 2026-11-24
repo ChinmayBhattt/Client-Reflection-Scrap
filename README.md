@@ -16,7 +16,7 @@ Production-ready waste collection, scrap trading, and recycling platform for **R
 | **Service Scope** | Residential societies, commercial offices, factories, IT parks, and workshops |
 | **Contact Phone** | `+91 98200 12345` (Configurable in `lib/site-config.ts`) |
 | **WhatsApp Direct**| `+91 98200 12345` (Configurable in `lib/site-config.ts`) |
-| **Email** | `contact@reflectionscrap.com` |
+| **Email** | `info@reflectionscrapsolutions.in` |
 
 ---
 

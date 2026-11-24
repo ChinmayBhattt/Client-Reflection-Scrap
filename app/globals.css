@@ -34,7 +34,7 @@
   }
 
   @media (prefers-color-scheme: dark) {
-    :root:not(:has(> head > meta[name="color-scheme"][content="light"])) {
+    :root:not(:has(> head > meta[name="color-scheme"][content="light"])):not(.light) {
       --brand-blue: 82 162 219;
       --brand-blue-hover: 59 139 196;
       --brand-blue-light: 23 43 66;
@@ -53,7 +53,9 @@
     }
   }
 
-  :root:has(> head > meta[name="color-scheme"][content="dark"]) {
+  :root:has(> head > meta[name="color-scheme"][content="dark"]),
+  :root.dark,
+  .dark {
     color-scheme: dark;
     --brand-blue: 82 162 219;
     --brand-blue-hover: 59 139 196;
@@ -72,8 +74,23 @@
     --scrollbar-thumb: var(--scrollbar-thumb-dark);
   }
 
-  :root:has(> head > meta[name="color-scheme"][content="light"]) {
+  :root:has(> head > meta[name="color-scheme"][content="light"]),
+  :root.light,
+  .light {
     color-scheme: light;
+    --brand-blue: 59 139 196;         /* #3B8BC4 */
+    --brand-blue-hover: 46 116 166;   /* #2E74A6 */
+    --brand-blue-light: 238 246 251;  /* #EEF6FB */
+    --brand-green: 91 174 101;        /* #5BAE65 */
+    --brand-green-hover: 74 153 83;   /* #4A9953 */
+    --brand-green-light: 237 247 238; /* #EDF7EE */
+    --brand-dark: 17 17 17;           /* #111111 */
+    --brand-muted: 85 85 85;          /* #555555 */
+    --brand-border: 226 228 222;      /* #E2E4DE */
+    --brand-surface: 255 255 255;     /* #FFFFFF */
+    --brand-bg: 250 250 247;          /* #FAFAF7 */
+    --muted-bg: 241 242 237;          /* #F1F2ED */
+    --muted-fg: 102 102 102;          /* #666666 */
   }
 
   @supports (color: light-dark(white, black)) {
@@ -144,27 +161,35 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root:not(:has(> head > meta[name="color-scheme"][content="light"])) .theme-toggle-sun {
+  :root:not(:has(> head > meta[name="color-scheme"][content="light"])):not(.light) .theme-toggle-sun {
     display: inline-flex;
   }
 
-  :root:not(:has(> head > meta[name="color-scheme"][content="light"])) .theme-toggle-moon {
+  :root:not(:has(> head > meta[name="color-scheme"][content="light"])):not(.light) .theme-toggle-moon {
     display: none;
   }
 }
 
-:root:has(> head > meta[name="color-scheme"][content="dark"]) .theme-toggle-sun {
+:root:has(> head > meta[name="color-scheme"][content="dark"]) .theme-toggle-sun,
+:root.dark .theme-toggle-sun,
+.dark .theme-toggle-sun {
   display: inline-flex;
 }
 
-:root:has(> head > meta[name="color-scheme"][content="dark"]) .theme-toggle-moon {
+:root:has(> head > meta[name="color-scheme"][content="dark"]) .theme-toggle-moon,
+:root.dark .theme-toggle-moon,
+.dark .theme-toggle-moon {
   display: none;
 }
 
-:root:has(> head > meta[name="color-scheme"][content="light"]) .theme-toggle-sun {
+:root:has(> head > meta[name="color-scheme"][content="light"]) .theme-toggle-sun,
+:root.light .theme-toggle-sun,
+.light .theme-toggle-sun {
   display: none;
 }
 
-:root:has(> head > meta[name="color-scheme"][content="light"]) .theme-toggle-moon {
+:root:has(> head > meta[name="color-scheme"][content="light"]) .theme-toggle-moon,
+:root.light .theme-toggle-moon,
+.light .theme-toggle-moon {
   display: inline-flex;
 }

@@ -356,7 +356,7 @@ export function ServicesClient() {
                 key={item.id}
                 id={item.id}
                 href={item.href}
-                className="group rounded-2xl border border-brand-border/80 bg-white dark:bg-card p-5 sm:p-6 shadow-sm hover:shadow-card hover:border-brand-green/60 transition-all duration-200 flex flex-col justify-between scroll-mt-28"
+                className="group rounded-2xl border border-brand-border/80 bg-brand-surface p-5 sm:p-6 shadow-sm hover:shadow-card hover:border-brand-green/60 transition-all duration-200 flex flex-col justify-between scroll-mt-28"
               >
                 <div>
                   {/* Colored circular icon container */}
